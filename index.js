@@ -34,7 +34,7 @@ server.post('/getMovies',function (req,res)  {
           var bodyJSON = JSON.parse(respBody);
 
           return res.json( {
-            fulfillmentText: 'Resp: ' + bodyJSON['0']['price']
+            fulfillmentText: 'Prima opzione: ' + '\nCategoria veicolo: ' + bodyJSON['0']['categoryName'] + '\nPrezzo: € ' + bodyJSON['0']['price'] + '\nInfo: ' + bodyJSON['0']['info']
           });
 
         });
