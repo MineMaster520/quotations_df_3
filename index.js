@@ -16,13 +16,7 @@ var port = process.env.PORT || 8080;
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
-server.post('/getMovies',function (req,res)  {
-
-    /*if(request.body.queryResult.parameters['vehicle']) {
-        return response.json({
-              fulfillmentText: 'Prova'
-        });
-    }*/
+server.post('/webhook',function (req,res)  {
 
     if(req.body.queryResult.allRequiredParamsPresent) {
 
@@ -32,47 +26,6 @@ server.post('/getMovies',function (req,res)  {
 
             var respBody = resp.text;
             var bodyJSON = JSON.parse(respBody);
-
-            var catName1 = bodyJSON['0']['categoryName'];
-
-            /*return res.json( {
-                fulfillmentText: 'Prima opzione: ' + '\nCategoria veicolo: ' + bodyJSON['0']['categoryName'] + '\nPrezzo: € ' + bodyJSON['0']['price'] + '\nInfo: ' + bodyJSON['0']['info']
-            });*/
-
-            /*return res.json({
-                  "payload": {
-                    "google": {
-                      "expectUserResponse": true,
-                      "richResponse": {
-                        "items": [
-                          {
-                            "simpleResponse": {
-                              "textToSpeech": "Prima opzione: "
-                            }
-                          },
-                          {
-                            "basicCard": {
-                              "title": bodyJSON['0']['categoryName'],
-                              "image": {
-                                "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-                                "accessibilityText": "Google Logo"
-                              },
-                              "buttons": [
-                                {
-                                  "title": "Seleziona",
-                                  "openUrlAction": {
-                                    "url": "https://www.google.com"
-                                  }
-                                }
-                              ],
-                              "imageDisplayOptions": "WHITE"
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-            });*/
 
             return res.json({
               "payload": {
