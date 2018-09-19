@@ -25,7 +25,7 @@ server.post('/getMovies',function (req,res)  {
 
     if(req.body.queryResult.allRequiredParamsPresent) {
 
-        https.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00', (resp) => {
+        http.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00', (resp) => {
           let data = '';
 
           // A chunk of data has been recieved.
