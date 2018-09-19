@@ -82,7 +82,7 @@ server.post('/getMovies',function (req,res)  {
                     "items": [
                       {
                         "simpleResponse": {
-                          "textToSpeech": "Choose a item"
+                          "textToSpeech": "Scegli un'opzione"
                         }
                       }
                     ]
@@ -92,7 +92,7 @@ server.post('/getMovies',function (req,res)  {
                     "data": {
                       "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
                       "listSelect": {
-                        "title": "Hello",
+                        "title": "Veicoli disponibili",
                         "items": [
                           {
                             "optionInfo": {
@@ -115,6 +115,17 @@ server.post('/getMovies',function (req,res)  {
                               "accessibilityText": "second alt"
                             },
                             "title": bodyJSON['1']['categoryName']
+                          },
+                          {
+                            "optionInfo": {
+                              "key": "third"
+                            },
+                            "description": "Prezzo: € " + bodyJSON['2']['price'] + ", Info: " + bodyJSON['2']['info'],
+                            "image": {
+                              "url": "https://lh3.googleusercontent.com/Nu3a6F80WfixUqf_ec_vgXy_c0-0r4VLJRXjVFF_X_CIilEu8B9fT35qyTEj_PEsKw",
+                              "accessibilityText": "second alt"
+                            },
+                            "title": bodyJSON['2']['categoryName']
                           }
                         ]
                       }
