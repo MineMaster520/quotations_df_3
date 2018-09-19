@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('https');
+const superagent = require('superagent');
 
 var unirest = require("unirest");
 
@@ -25,25 +26,18 @@ server.post('/getMovies',function (req,res)  {
 
     if(req.body.queryResult.allRequiredParamsPresent) {
 
-        http.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00', (resp) => {
-          let data = '';
+        superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
+        .end((err, resp) => {
+          if (err) { return console.log(err); }
+          console.log(resp.body.url);
+          console.log(resp.body.explanation);
 
-          // A chunk of data has been recieved.
-          resp.on('data', (chunk) => {
-            data += chunk;
-          });
-
-          // The whole response has been received. Print out the result.
-          resp.on('end', () => {
-            console.log(JSON.parse(data).explanation);
-            return res.json( {
-                fulfillmentText: 'Resp: ' + JSON.parse(data).explanation
+          return res.json( {
+                fulfillmentText: 'Resp: ' + resp.body.url
             });
-          });
 
-            }).on("error", (err) => {
-              console.log("Error: " + err.message);
         });
+
         
     }
 
