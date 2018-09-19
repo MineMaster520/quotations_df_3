@@ -37,7 +37,7 @@ server.post('/getMovies',function (req,res)  {
                 fulfillmentText: 'Prima opzione: ' + '\nCategoria veicolo: ' + bodyJSON['0']['categoryName'] + '\nPrezzo: € ' + bodyJSON['0']['price'] + '\nInfo: ' + bodyJSON['0']['info']
             });*/
 
-            return res.json({
+            return res.json( {
                 "platform": "ACTIONS_ON_GOOGLE",
 
                 "card": {
@@ -62,7 +62,7 @@ server.post('/getMovies',function (req,res)  {
 
                 }
 
-        })
+            });
 
         });
 
