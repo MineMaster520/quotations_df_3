@@ -31,10 +31,11 @@ server.post('/getMovies',function (req,res)  {
           if (err) { return console.log(err); }
 
           var respBody = resp.text;
+          var bodyJSON = JSON.parse(respBody);
 
           return res.json( {
-                fulfillmentText: 'Resp: ' + respBody
-            });
+            fulfillmentText: 'Resp: ' + bodyJSON['0']['price']
+          });
 
         });
 
