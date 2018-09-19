@@ -75,7 +75,7 @@ server.post('/webhook',function (req,res)  {
                             },
                             "description": "Prezzo: € " + bodyJSON['2']['price'] + ", Info: " + bodyJSON['2']['info'],
                             "image": {
-                              "url": "https://lh3.googleusercontent.com/Nu3a6F80WfixUqf_ec_vgXy_c0-0r4VLJRXjVFF_X_CIilEu8B9fT35qyTEj_PEsKw",
+                              "url": "https://drive.google.com/uc?id=1A8J-q-BzIWvZyzieZe6IzQD0U-9eQJJN",
                               "accessibilityText": "second alt"
                             },
                             "title": bodyJSON['2']['categoryName']
