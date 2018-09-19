@@ -82,7 +82,7 @@ server.post('/getMovies',function (req,res)  {
                 "items": [
                   {
                     "simpleResponse": {
-                      "textToSpeech": "Choose a item"
+                      "textToSpeech": "Scegli un'opzione"
                     }
                   }
                 ]
@@ -92,29 +92,29 @@ server.post('/getMovies',function (req,res)  {
                 "data": {
                   "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
                   "listSelect": {
-                    "title": "Hello",
+                    "title": "Veicoli disponibili",
                     "items": [
                       {
                         "optionInfo": {
                           "key": "first title key"
                         },
-                        "description": "first description",
+                        "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
                         "image": {
                           "url": "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png",
                           "accessibilityText": "first alt"
                         },
-                        "title": "first title"
+                        "title": bodyJSON['0']['categoryName']
                       },
                       {
                         "optionInfo": {
                           "key": "second"
                         },
-                        "description": "second description",
+                        "description": "Prezzo: € " + bodyJSON['1']['price'] + ", Info: " + bodyJSON['1']['info'],
                         "image": {
                           "url": "https://lh3.googleusercontent.com/Nu3a6F80WfixUqf_ec_vgXy_c0-0r4VLJRXjVFF_X_CIilEu8B9fT35qyTEj_PEsKw",
                           "accessibilityText": "second alt"
                         },
-                        "title": "second title"
+                        "title": bodyJSON['1']['categoryName']
                       }
                     ]
                   }
