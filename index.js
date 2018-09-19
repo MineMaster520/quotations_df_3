@@ -53,7 +53,7 @@ server.post('/webhook',function (req,res)  {
                             },
                             "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
                             "image": {
-                              "url": "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png",
+                              "url": "https://drive.google.com/uc?id=1QnH0vS2yWTgIrzWtWU3So2TlY_rx9a3h",
                               "accessibilityText": "first alt"
                             },
                             "title": bodyJSON['0']['categoryName']
@@ -64,7 +64,7 @@ server.post('/webhook',function (req,res)  {
                             },
                             "description": "Prezzo: € " + bodyJSON['1']['price'] + ", Info: " + bodyJSON['1']['info'],
                             "image": {
-                              "url": "https://lh3.googleusercontent.com/Nu3a6F80WfixUqf_ec_vgXy_c0-0r4VLJRXjVFF_X_CIilEu8B9fT35qyTEj_PEsKw",
+                              "url": "https://drive.google.com/uc?id=1QnH0vS2yWTgIrzWtWU3So2TlY_rx9a3h",
                               "accessibilityText": "second alt"
                             },
                             "title": bodyJSON['1']['categoryName']
