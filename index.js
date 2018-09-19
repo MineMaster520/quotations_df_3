@@ -25,8 +25,24 @@ server.post('/getMovies',function (req,res)  {
 
     if(req.body.queryResult.allRequiredParamsPresent) {
 
-        return res.json( {
-            fulfillmentText: 'Prova'
+        https.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00', (resp) => {
+          let data = '';
+
+          // A chunk of data has been recieved.
+          resp.on('data', (chunk) => {
+            data += chunk;
+          });
+
+          // The whole response has been received. Print out the result.
+          resp.on('end', () => {
+            console.log(JSON.parse(data).explanation);
+            return res.json( {
+                fulfillmentText: 'Resp: ' + JSON.parse(data).explanation
+            });
+          });
+
+            }).on("error", (err) => {
+              console.log("Error: " + err.message);
         });
         
     }
