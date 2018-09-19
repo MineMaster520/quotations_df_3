@@ -38,7 +38,6 @@ server.post('/getMovies',function (req,res)  {
             });*/
 
             return res.json( {
-                "platform": "ACTIONS_ON_GOOGLE",
 
                 "card": {
 
