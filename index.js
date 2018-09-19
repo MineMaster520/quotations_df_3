@@ -37,31 +37,40 @@ server.post('/getMovies',function (req,res)  {
                 fulfillmentText: 'Prima opzione: ' + '\nCategoria veicolo: ' + bodyJSON['0']['categoryName'] + '\nPrezzo: € ' + bodyJSON['0']['price'] + '\nInfo: ' + bodyJSON['0']['info']
             });*/
 
-            return res.json( {
-
-                card: {
-
-                    "title": "card title",
-
-                    "subtitle": "card subtitle",
-
-                    "imageUri": "https://example.com/image.jpg",
-
-                    "buttons": [
-
-                        {
-
-                        "text": "Buttle Text",
-
-                        "postback": "https://example.com"
-
-                        }
-
-                    ]
-
+            return res.json({
+  "payload": {
+    "google": {
+      "expectUserResponse": true,
+      "richResponse": {
+        "items": [
+          {
+            "simpleResponse": {
+              "textToSpeech": "This is a Basic Card:"
+            }
+          },
+          {
+            "basicCard": {
+              "title": "Card Title",
+              "image": {
+                "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                "accessibilityText": "Google Logo"
+              },
+              "buttons": [
+                {
+                  "title": "Button Title",
+                  "openUrlAction": {
+                    "url": "https://www.google.com"
+                  }
                 }
-
-            });
+              ],
+              "imageDisplayOptions": "WHITE"
+            }
+          }
+        ]
+      }
+    }
+  }
+});
 
         });
 
