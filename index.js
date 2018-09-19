@@ -33,6 +33,8 @@ server.post('/getMovies',function (req,res)  {
             var respBody = resp.text;
             var bodyJSON = JSON.parse(respBody);
 
+            var catName1 = bodyJSON['0']['categoryName'];
+
             /*return res.json( {
                 fulfillmentText: 'Prima opzione: ' + '\nCategoria veicolo: ' + bodyJSON['0']['categoryName'] + '\nPrezzo: € ' + bodyJSON['0']['price'] + '\nInfo: ' + bodyJSON['0']['info']
             });*/
@@ -98,12 +100,12 @@ server.post('/getMovies',function (req,res)  {
                 "optionInfo": {
                   "key": "first title key"
                 },
-                "description": "first description",
+                "description": catName1,
                 "image": {
                   "url": "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png",
                   "accessibilityText": "first alt"
                 },
-                "title": bodyJSON['0']['categoryName']
+                "title": "catName1"
               },
               {
                 "optionInfo": {
