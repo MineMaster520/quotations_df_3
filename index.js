@@ -56,7 +56,7 @@ server.post('/webhook',function (req,res)  {
                               "url": "https://drive.google.com/uc?id=1QnH0vS2yWTgIrzWtWU3So2TlY_rx9a3h",
                               "accessibilityText": "first alt"
                             },
-                            "title": bodyJSON['0']['categoryName']
+                            "title": "1° - " + bodyJSON['0']['categoryName']
                           },
                           {
                             "optionInfo": {
@@ -67,7 +67,7 @@ server.post('/webhook',function (req,res)  {
                               "url": "https://drive.google.com/uc?id=1QnH0vS2yWTgIrzWtWU3So2TlY_rx9a3h",
                               "accessibilityText": "second alt"
                             },
-                            "title": bodyJSON['1']['categoryName']
+                            "title": "2° - " + bodyJSON['1']['categoryName']
                           },
                           {
                             "optionInfo": {
@@ -78,7 +78,7 @@ server.post('/webhook',function (req,res)  {
                               "url": "https://drive.google.com/uc?id=1A8J-q-BzIWvZyzieZe6IzQD0U-9eQJJN",
                               "accessibilityText": "second alt"
                             },
-                            "title": bodyJSON['2']['categoryName']
+                            "title": "3° - " + bodyJSON['2']['categoryName']
                           }
                         ]
                       }
@@ -88,7 +88,10 @@ server.post('/webhook',function (req,res)  {
               }
         });
 
-    });
+
+    //if(req.body.queryResult.)
+
+});
 
         
 
