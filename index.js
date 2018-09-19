@@ -98,7 +98,7 @@ server.post('/getMovies',function (req,res)  {
                         "optionInfo": {
                           "key": "first title key"
                         },
-                        "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
+                        "description": "Prezzo: € " /*+ bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info']*/,
                         "image": {
                           "url": "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png",
                           "accessibilityText": "first alt"
@@ -109,7 +109,7 @@ server.post('/getMovies',function (req,res)  {
                         "optionInfo": {
                           "key": "second"
                         },
-                        "description": "Prezzo: € " + bodyJSON['1']['price'] + ", Info: " + bodyJSON['1']['info'],
+                        "description": "Prezzo: € ",
                         "image": {
                           "url": "https://lh3.googleusercontent.com/Nu3a6F80WfixUqf_ec_vgXy_c0-0r4VLJRXjVFF_X_CIilEu8B9fT35qyTEj_PEsKw",
                           "accessibilityText": "second alt"
