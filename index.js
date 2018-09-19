@@ -76,7 +76,7 @@ server.post('/getMovies',function (req,res)  {
 
         });
 
-        return res.json( {
+        return res.json({
   "payload": {
     "google": {
       "expectUserResponse": true,
@@ -93,19 +93,18 @@ server.post('/getMovies',function (req,res)  {
         "intent": "actions.intent.OPTION",
         "data": {
           "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
-          "listSelect": {
-            "title": "Hello",
+          "carouselSelect": {
             "items": [
               {
                 "optionInfo": {
-                  "key": "first title key"
+                  "key": "first title"
                 },
-                "description": "description",
+                "description": bodyJSON['0']['categoryName'],
                 "image": {
                   "url": "https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png",
                   "accessibilityText": "first alt"
                 },
-                "title": "catName1"
+                "title": "first title"
               },
               {
                 "optionInfo": {
