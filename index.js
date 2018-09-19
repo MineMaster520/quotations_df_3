@@ -65,6 +65,24 @@ server.post('/getMovies',function (req,res)  {
                               ],
                               "imageDisplayOptions": "WHITE"
                             }
+                          },
+                          {
+                            "basicCard": {
+                              "title": bodyJSON['1']['categoryName'],
+                              "image": {
+                                "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                                "accessibilityText": "Google Logo"
+                              },
+                              "buttons": [
+                                {
+                                  "title": "Seleziona",
+                                  "openUrlAction": {
+                                    "url": "https://www.google.com"
+                                  }
+                                }
+                              ],
+                              "imageDisplayOptions": "WHITE"
+                            }
                           }
                         ]
                       }
