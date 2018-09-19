@@ -32,7 +32,7 @@ server.post('/getMovies',function (req,res)  {
           console.log(resp.body.url);
           console.log(resp.body.explanation);
 
-          var respBody = resp.body;
+          var respBody = JSON.stringify(resp.body);
 
           return res.json( {
                 fulfillmentText: 'Resp: ' + respBody
