@@ -38,39 +38,39 @@ server.post('/getMovies',function (req,res)  {
             });*/
 
             return res.json({
-  "payload": {
-    "google": {
-      "expectUserResponse": true,
-      "richResponse": {
-        "items": [
-          {
-            "simpleResponse": {
-              "textToSpeech": "This is a Basic Card:"
-            }
-          },
-          {
-            "basicCard": {
-              "title": "Card Title",
-              "image": {
-                "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-                "accessibilityText": "Google Logo"
-              },
-              "buttons": [
-                {
-                  "title": "Button Title",
-                  "openUrlAction": {
-                    "url": "https://www.google.com"
+                  "payload": {
+                    "google": {
+                      "expectUserResponse": true,
+                      "richResponse": {
+                        "items": [
+                          {
+                            "simpleResponse": {
+                              "textToSpeech": "Prima opzione: "
+                            }
+                          },
+                          {
+                            "basicCard": {
+                              "title": bodyJSON['0']['categoryName'],
+                              "image": {
+                                "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                                "accessibilityText": "Google Logo"
+                              },
+                              "buttons": [
+                                {
+                                  "title": "Seleziona",
+                                  "openUrlAction": {
+                                    "url": "https://www.google.com"
+                                  }
+                                }
+                              ],
+                              "imageDisplayOptions": "WHITE"
+                            }
+                          }
+                        ]
+                      }
+                    }
                   }
-                }
-              ],
-              "imageDisplayOptions": "WHITE"
-            }
-          }
-        ]
-      }
-    }
-  }
-});
+            });
 
         });
 
