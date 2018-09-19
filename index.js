@@ -28,14 +28,41 @@ server.post('/getMovies',function (req,res)  {
 
         superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
         .end((err, resp) => {
-          if (err) { return console.log(err); }
+            if (err) { return console.log(err); }
 
-          var respBody = resp.text;
-          var bodyJSON = JSON.parse(respBody);
+            var respBody = resp.text;
+            var bodyJSON = JSON.parse(respBody);
 
-          return res.json( {
-            fulfillmentText: 'Prima opzione: ' + '\nCategoria veicolo: ' + bodyJSON['0']['categoryName'] + '\nPrezzo: € ' + bodyJSON['0']['price'] + '\nInfo: ' + bodyJSON['0']['info']
-          });
+            /*return res.json( {
+                fulfillmentText: 'Prima opzione: ' + '\nCategoria veicolo: ' + bodyJSON['0']['categoryName'] + '\nPrezzo: € ' + bodyJSON['0']['price'] + '\nInfo: ' + bodyJSON['0']['info']
+            });*/
+
+            return res.json({
+                "platform": "ACTIONS_ON_GOOGLE",
+
+                "card": {
+
+                    "title": "card title",
+
+                    "subtitle": "card subtitle",
+
+                    "imageUri": "https://example.com/image.jpg",
+
+                    "buttons": [
+
+                        {
+
+                        "text": "Buttle Text",
+
+                        "postback": "https://example.com"
+
+                        }
+
+                    ]
+
+                }
+
+        })
 
         });
 
