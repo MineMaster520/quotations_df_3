@@ -26,13 +26,15 @@ server.post('/getMovies',function (req,res)  {
 
     if(req.body.queryResult.allRequiredParamsPresent) {
 
-        superagent.get('https://jsonplaceholder.typicode.com/todos/1')
+        superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
         .end((err, resp) => {
           if (err) { return console.log(err); }
+
+
           console.log(resp.body.url);
           console.log(resp.body.explanation);
 
-          var respBody = JSON.stringify(resp.body);
+          var respBody = resp;
 
           return res.json( {
                 fulfillmentText: 'Resp: ' + respBody
