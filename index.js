@@ -30,7 +30,7 @@ server.post('/getMovies',function (req,res)  {
         .end((err, resp) => {
           if (err) { return console.log(err); }
 
-          var respBody = resp.body;
+          var respBody = resp.body[0].price;
 
           return res.json( {
                 fulfillmentText: 'Resp: ' + respBody
