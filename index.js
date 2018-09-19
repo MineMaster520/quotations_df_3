@@ -39,7 +39,7 @@ server.post('/getMovies',function (req,res)  {
 
             return res.json( {
 
-                "card": {
+                card: {
 
                     "title": "card title",
 
