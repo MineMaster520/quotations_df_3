@@ -32,8 +32,10 @@ server.post('/getMovies',function (req,res)  {
           console.log(resp.body.url);
           console.log(resp.body.explanation);
 
+          var respBody = resp.body.url;
+
           return res.json( {
-                fulfillmentText: 'Resp: ' + resp.body.url
+                fulfillmentText: 'Resp: ' + respBody[0]['categoryName']
             });
 
         });
