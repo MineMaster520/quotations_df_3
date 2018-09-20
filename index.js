@@ -88,9 +88,9 @@ server.post('/webhook',function (req,res)  {
               }
         };
 
-        /*if(!bodyJSON['3']) {
-          respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
-        }*/
+        if(bodyJSON['3']['price'] == undefined) {
+          //respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
+        }
 
 
         return res.json(respJSON);
