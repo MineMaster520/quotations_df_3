@@ -92,7 +92,7 @@ server.post('/webhook',function (req,res)  {
 
         if(bodyJSON['3']['price'] != undefined) {
           //respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
-          var appFourth = {
+          /*var appFourth = {
                             "optionInfo": {
                               "key": "fourth"
                             },
@@ -104,7 +104,7 @@ server.post('/webhook',function (req,res)  {
                             "title": "4° - " + bodyJSON['3']['categoryName']
                           };
 
-          respJSON.append(appFourth);
+          respJSON.append(appFourth);*/
         }
 
 
