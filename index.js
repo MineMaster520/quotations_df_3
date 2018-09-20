@@ -90,7 +90,7 @@ server.post('/webhook',function (req,res)  {
 
 
 
-        if(bodyJSON['3']['price'] != undefined) {
+        if(bodyJSON['3']['price'] == undefined) {
           //respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
           /*var appFourth = {
                             "optionInfo": {
