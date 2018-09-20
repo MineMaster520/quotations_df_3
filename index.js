@@ -100,7 +100,7 @@ server.post('/webhook',function (req,res)  {
         };
 
         if(!bodyJSON['3']) {
-          respJSON.items.remove(3);
+          respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
         }
 
 
