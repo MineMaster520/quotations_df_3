@@ -89,7 +89,7 @@ server.post('/webhook',function (req,res)  {
                               "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['3']['category'] + ".jpg",
                               "accessibilityText": bodyJSON['3']['categoryName']
                             },
-                            "title": "3° - " + bodyJSON['3']['categoryName']
+                            "title": "4° - " + bodyJSON['3']['categoryName']
                           }
                         ]
                       }
@@ -99,9 +99,9 @@ server.post('/webhook',function (req,res)  {
               }
         };
 
-        if(!bodyJSON['3']) {
-          //respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
-        }
+        /*if(!bodyJSON['3']) {
+          respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
+        }*/
 
 
         return res.json(respJSON);
