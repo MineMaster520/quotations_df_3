@@ -88,8 +88,23 @@ server.post('/webhook',function (req,res)  {
               }
         };
 
-        if(bodyJSON['3']['price'] == undefined) {
-          respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
+
+
+        if(bodyJSON['3']['price'] != undefined) {
+          //respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
+          var appFourth = {
+                            "optionInfo": {
+                              "key": "fourth"
+                            },
+                            "description": "Prezzo: € " + bodyJSON['3']['price'] + ", Info: " + bodyJSON['3']['info'],
+                            "image": {
+                              "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['3']['category'] + ".jpg",
+                              "accessibilityText": bodyJSON['3']['categoryName']
+                            },
+                            "title": "4° - " + bodyJSON['3']['categoryName']
+                          };
+
+          respJSON.append(appFourth);
         }
 
 
