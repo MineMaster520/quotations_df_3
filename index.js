@@ -18,7 +18,7 @@ const server = express();
 server.use(bodyParser.json());
 server.post('/getMovies',function (req,res)  {
 
-    if(req.body.queryResult.allRequiredParamsPresent) {
+    if(req.body.queryResult.intent == RichiestaAuto-Mail) {
 
         superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
         .end((err, resp) => {
