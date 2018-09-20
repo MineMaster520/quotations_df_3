@@ -54,7 +54,7 @@ server.post('/webhook',function (req,res)  {
                             "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
                             "image": {
                               "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
-                              "accessibilityText": bodyJSON['2']['categoryName']
+                              "accessibilityText": bodyJSON['0']['categoryName']
                             },
                             "title": "1° - " + bodyJSON['0']['categoryName']
                           },
@@ -64,7 +64,8 @@ server.post('/webhook',function (req,res)  {
                             },
                             "description": "Prezzo: € " + bodyJSON['1']['price'] + ", Info: " + bodyJSON['1']['info'],
                             "image": {
-                              "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['1']['category'] + ".jpg": bodyJSON['2']['categoryName']
+                              "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['1']['category'] + ".jpg",
+                              "accessibilityText": bodyJSON['1']['categoryName']
                             },
                             "title": "2° - " + bodyJSON['1']['categoryName']
                           },
@@ -74,7 +75,8 @@ server.post('/webhook',function (req,res)  {
                             },
                             "description": "Prezzo: € " + bodyJSON['2']['price'] + ", Info: " + bodyJSON['2']['info'],
                             "image": {
-                              "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['2']['category'] + ".jpg": bodyJSON['2']['categoryName']
+                              "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['2']['category'] + ".jpg",
+                              "accessibilityText": bodyJSON['2']['categoryName']
                             },
                             "title": "3° - " + bodyJSON['2']['categoryName']
                           }
