@@ -27,7 +27,7 @@ server.post('/webhook',function (req,res)  {
             var respBody = resp.text;
             var bodyJSON = JSON.parse(respBody);
 
-            return res.json({
+            var respJSON = {
               "payload": {
                 "google": {
                   "expectUserResponse": true,
@@ -86,7 +86,9 @@ server.post('/webhook',function (req,res)  {
                   }
                 }
               }
-        });
+        };
+
+            return res.json(respJSON);
 
 
     //if(req.body.queryResult.)
