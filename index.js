@@ -194,9 +194,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-GiornoPartenza":
-            respJSON2 = {"parameters": {
-              "date": req.body.queryResult.parameters.date
-            },"fulfillmentText": "Per che ora gradirebbe partire ?",
+            respJSON2 = {"fulfillmentText": "Per che ora gradirebbe partire ?",
             "followupEventInput": {
               "name": "Agente-GiornoPartenza",
               "languageCode": "it-IT",
@@ -207,9 +205,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-OraPartenza":
-            respJSON2 = {"parameters": {
-              "time": req.body.queryResult.parameters.time
-            },"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?",
+            respJSON2 = {"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?",
             "followupEventInput": {
               "name": "Agente-OraPartenza",
               "languageCode": "it-IT",
