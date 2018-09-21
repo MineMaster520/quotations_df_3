@@ -139,14 +139,14 @@ server.post('/webhook',function (req,res)  {
                 }
               }
             ],*/
-          "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?",
-        "followupEventInput": {
+          "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?"
+        /*"followupEventInput": {
           "name": "Agente_Destinazione",
           "languageCode": "it-IT",
           "parameters": {
             "param": "param value"
           }
-        }};
+        }*/};
       break;
 
       case "Agente-NumeroPasseggeri":
@@ -171,48 +171,48 @@ server.post('/webhook',function (req,res)  {
             }
         
           ],*/
-            "fulfillmentText": "Perfetto, mi dica da dove vuole partire.",
-            "followupEventInput": {
+            "fulfillmentText": "Perfetto, mi dica da dove vuole partire."
+            /*"followupEventInput": {
               "name": "Agente-NumeroPasseggeri",
               "languageCode": "it-IT",
               "parameters": {
                 "param": "param_value"
               }
-            }};
+            }*/};
             break;
 
             case "Agente-CittaDiPartenza":
             respJSON2 = {
-            "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?",
-            "followupEventInput": {
+            "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
+            /*"followupEventInput": {
               "name": "Agente-CittaDiPartenza",
               "languageCode": "it-IT",
               "parameters": {
                 "param": "param value"
               }
-            }};
+            }*/};
             break;
 
             case "Agente-GiornoPartenza":
-            respJSON2 = {"fulfillmentText": "Per che ora gradirebbe partire ?",
-            "followupEventInput": {
+            respJSON2 = {"fulfillmentText": "Per che ora gradirebbe partire ?"
+            /*"followupEventInput": {
               "name": "Agente-GiornoPartenza",
               "languageCode": "it-IT",
               "parameters": {
                 "param": "param value"
               }
-            }};
+            }*/};
             break;
 
             case "Agente-OraPartenza":
-            respJSON2 = {"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?",
-            "followupEventInput": {
+            respJSON2 = {"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?"
+            /*"followupEventInput": {
               "name": "Agente-OraPartenza",
               "languageCode": "it-IT",
               "parameters": {
                 "param": "param value"
               }
-            }};
+            }*/};
             
           }
 
