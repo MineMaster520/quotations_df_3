@@ -55,7 +55,7 @@ server.post('/webhook',function (req,res)  {
                     "optionInfo": {
                       "key": "first title key"
                     },
-                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numPasseggeri,
+                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... ",
                     "image": {
                       "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                       "accessibilityText": bodyJSON['0']['categoryName']
