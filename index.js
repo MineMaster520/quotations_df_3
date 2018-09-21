@@ -176,7 +176,7 @@ server.post('/webhook',function (req,res)  {
               "name": "Agente-NumeroPasseggeri",
               "languageCode": "it-IT",
               "parameters": {
-                "param": "param_value"
+                "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
               }
             }};
             break;
@@ -188,7 +188,7 @@ server.post('/webhook',function (req,res)  {
               "name": "Agente-CittaDiPartenza",
               "languageCode": "it-IT",
               "parameters": {
-                "param": "param value"
+                "geo-city": req.body.queryResult.parameters.geo-city
               }
             }};
             break;
