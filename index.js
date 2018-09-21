@@ -171,7 +171,7 @@ server.post('/webhook',function (req,res)  {
             }
         
           ],*/
-            "fulfillmentText": "Perfetto, mi dica da dove vuole partire." + req.body.queryResult.parameters.Num_passeggeri
+            "fulfillmentText": "Perfetto, mi dica da dove vuole partire." + numPasseggeri
             /*"followupEventInput": {
               "name": "Agente-NumeroPasseggeri",
               "languageCode": "it-IT",
