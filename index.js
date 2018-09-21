@@ -20,6 +20,8 @@ const server = express();
 server.use(bodyParser.json());
 server.post('/webhook',function (req,res)  {
 
+  var numPasseggeri = 100;
+
     if(req.body.queryResult.intent.displayName == "Agente-Mail") {
 
         superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
@@ -53,7 +55,7 @@ server.post('/webhook',function (req,res)  {
                             "optionInfo": {
                               "key": "first title key"
                             },
-                            "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
+                            "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numPasseggeri,
                             "image": {
                               "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                               "accessibilityText": bodyJSON['0']['categoryName']
@@ -137,6 +139,7 @@ server.post('/webhook',function (req,res)  {
                       }};
           break;
         case "Agente-NumeroPasseggeri":
+          numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = {"agentToAssistantDebug": {
       "agentToAssistantJson": "{}"
     },"followupEventInput": {
