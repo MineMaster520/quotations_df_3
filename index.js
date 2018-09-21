@@ -127,9 +127,9 @@ server.post('/webhook',function (req,res)  {
 
       switch(req.body.queryResult.intent.displayName) {
         case "Agente_Destinazione":
-          respJSON2 = {"agentToAssistantDebug": {
+          respJSON2 = {/*"agentToAssistantDebug": {
                         "agentToAssistantJson": "{}"
-                      },
+                      },*/
                       "followupEventInput": {
                           "name": "Agente_Destinazione",
                           "languageCode": "it-IT",
@@ -140,9 +140,7 @@ server.post('/webhook',function (req,res)  {
           break;
         case "Agente-NumeroPasseggeri":
           numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
-          respJSON2 = {"agentToAssistantDebug": {
-      "agentToAssistantJson": "{}"
-    },"followupEventInput": {
+          respJSON2 = {"followupEventInput": {
                           "name": "Agente-NumeroPasseggeri",
                           "languageCode": "it-IT",
                           "parameters": {
@@ -151,9 +149,7 @@ server.post('/webhook',function (req,res)  {
                       }};
           break;
         case "Agente-CittaDiPartenza":
-          respJSON2 = {"agentToAssistantDebug": {
-      "agentToAssistantJson": "{}"
-    },"followupEventInput": {
+          respJSON2 = {"followupEventInput": {
                           "name": "Agente-CittaDiPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
@@ -162,9 +158,7 @@ server.post('/webhook',function (req,res)  {
                       }};
           break;
         case "Agente-GiornoPartenza":
-          respJSON2 = {"agentToAssistantDebug": {
-      "agentToAssistantJson": "{}"
-    },"followupEventInput": {
+          respJSON2 = {"followupEventInput": {
                           "name": "Agente-GiornoPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
@@ -173,9 +167,7 @@ server.post('/webhook',function (req,res)  {
                       }};
           break;
         case "Agente-OraPartenza":
-          respJSON2 = {"agentToAssistantDebug": {
-      "agentToAssistantJson": "{}"
-    },"followupEventInput": {
+          respJSON2 = {"followupEventInput": {
                           "name": "Agente-OraPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
