@@ -16,7 +16,7 @@ var port = process.env.PORT || 8080;
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
-server.post('/getMovies',function (req,res)  {
+server.post('/webhook',function (req,res)  {
 
     if(req.body.queryResult.allRequiredParamsPresent) {
 
