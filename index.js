@@ -130,10 +130,7 @@ server.post('/webhook',function (req,res)  {
           respJSON2 = {"fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?",
                       "followupEventInput": {
                           "name": "Agente_Destinazione",
-                          "languageCode": "it-IT",
-                          "parameters": {
-                            "param": "param value"
-                          }
+                          "languageCode": "it-IT"
                       }};
           break;
         case "Agente-NumeroPasseggeri":
@@ -141,20 +138,14 @@ server.post('/webhook',function (req,res)  {
           respJSON2 = { "fulfillmentText": "Perfetto, mi dica da dove vuole partire.   " + req.body.queryResult.parameters.Num_passeggeri,
             "followupEventInput": {
                           "name": "Agente-NumeroPasseggeri",
-                          "languageCode": "it-IT",
-                          "parameters": {
-                            "param": "param value"
-                          }
+                          "languageCode": "it-IT"
                       }};
           break;
         case "Agente-CittaDiPartenza":
           respJSON2 = {"fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?",
             "followupEventInput": {
                           "name": "Agente-CittaDiPartenza",
-                          "languageCode": "it-IT",
-                          "parameters": {
-                            "param": "param value"
-                          }
+                          "languageCode": "it-IT"
                       }};
           break;
         case "Agente-GiornoPartenza":
