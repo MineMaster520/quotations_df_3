@@ -123,55 +123,55 @@ server.post('/webhook',function (req,res)  {
 
       var respJSON2 = {};
 
-      switch(req.body.queryResult.intent.displayName) {
+      /*switch(req.body.queryResult.intent.displayName) {
         case "Agente_Destinazione":
-        respJSON2 = "followupEventInput": {
-                        "name": "Agente_Destinazione",
-                        "languageCode": "it-IT",
-                        "parameters": {
-                          "param": "param value"
-                        }
-                    };
+          respJSON2 = "followupEventInput": {
+                          "name": "Agente_Destinazione",
+                          "languageCode": "it-IT",
+                          "parameters": {
+                            "param": "param value"
+                          }
+                      };
           break;
         case "Agente-NumeroPasseggeri":
-        respJSON2 = "followupEventInput": {
-                        "name": "Agente-NumeroPasseggeri",
-                        "languageCode": "it-IT",
-                        "parameters": {
-                          "param": "param value"
-                        }
-                    };
+          respJSON2 = "followupEventInput": {
+                          "name": "Agente-NumeroPasseggeri",
+                          "languageCode": "it-IT",
+                          "parameters": {
+                            "param": "param value"
+                          }
+                      };
           break;
         case "Agente-CittaDiPartenza":
-        respJSON2 = "followupEventInput": {
-                        "name": "Agente-CittaDiPartenza",
-                        "languageCode": "it-IT",
-                        "parameters": {
-                          "param": "param value"
-                        }
-                    };
+          respJSON2 = "followupEventInput": {
+                          "name": "Agente-CittaDiPartenza",
+                          "languageCode": "it-IT",
+                          "parameters": {
+                            "param": "param value"
+                          }
+                      };
           break;
         case "Agente-GiornoPartenza":
-        respJSON2 = "followupEventInput": {
-                        "name": "Agente-GiornoPartenza",
-                        "languageCode": "it-IT",
-                        "parameters": {
-                          "param": "param value"
-                        }
-                    };
+          respJSON2 = "followupEventInput": {
+                          "name": "Agente-GiornoPartenza",
+                          "languageCode": "it-IT",
+                          "parameters": {
+                            "param": "param value"
+                          }
+                      };
           break;
         case "Agente-OraPartenza":
-        respJSON2 = "followupEventInput": {
-                        "name": "Agente-OraPartenza",
-                        "languageCode": "it-IT",
-                        "parameters": {
-                          "param": "param value"
-                        }
-                    };
+          respJSON2 = "followupEventInput": {
+                          "name": "Agente-OraPartenza",
+                          "languageCode": "it-IT",
+                          "parameters": {
+                            "param": "param value"
+                          }
+                      };
           break;
         default:
           break;  
-      }
+      }*/
 
       
 
