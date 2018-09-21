@@ -129,7 +129,7 @@ server.post('/webhook',function (req,res)  {
 
       case "Agente_Destinazione":
         respJSON2 = {
-          "outputContexts": [
+          /*"outputContexts": [
               {
                 "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente_destinazione-followup",
                 "lifespanCount": 2,
@@ -138,7 +138,7 @@ server.post('/webhook',function (req,res)  {
                   "geo-city1": req.body.queryResult.parameters.geo-city1
                 }
               }
-            ],
+            ],*/
           "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?",
         "followupEventInput": {
           "name": "Agente_Destinazione",
@@ -152,7 +152,7 @@ server.post('/webhook',function (req,res)  {
       case "Agente-NumeroPasseggeri":
           //numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = { 
-            "outputContexts": [
+            /*"outputContexts": [
             {
               "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente_destinazione-followup",
               "lifespanCount": 1,
@@ -170,7 +170,7 @@ server.post('/webhook',function (req,res)  {
               }
             }
         
-          ],
+          ],*/
             "fulfillmentText": "Perfetto, mi dica da dove vuole partire.",
             "followupEventInput": {
               "name": "Agente-NumeroPasseggeri",
