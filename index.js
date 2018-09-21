@@ -143,7 +143,7 @@ server.post('/webhook',function (req,res)  {
                           "name": "Agente-NumeroPasseggeri",
                           "languageCode": "it-IT",
                           "parameters": {
-                            "param": "param value"
+                            "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
                           }
                       }};
           break;
