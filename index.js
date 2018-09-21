@@ -187,8 +187,6 @@ server.post('/webhook',function (req,res)  {
                 "param": "param value"
               }
             }};
-            default:
-            break;
             
           }
 
