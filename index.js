@@ -15,10 +15,19 @@ let errorResposne = {
 //Agente_Destinazione.Agente_Destinazione-yes.Agente-NumeroPasseggeri-yes.Agente-CittaDiPartenza-yes.Agente-GiornoPartenza-yes.Agente-OraPartenza-yes
 
 var port = process.env.PORT || 8080;
+var numPass;
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
 server.post('/webhook',function (req,res)  {
+
+  function numVar(num, bool) {
+    if (bool == 0) {
+      numPass = num;
+    } else {
+      return numPass;
+    }
+  }
 
 
   if(req.body.queryResult.intent.displayName == "Agente-Mail") {
@@ -54,7 +63,7 @@ server.post('/webhook',function (req,res)  {
                     "optionInfo": {
                       "key": "first title key"
                     },
-                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numPasseggeri,
+                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numVar(20,1),
                     "image": {
                       "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                       "accessibilityText": bodyJSON['0']['categoryName']
@@ -149,7 +158,7 @@ server.post('/webhook',function (req,res)  {
       break;
 
       case "Agente-NumeroPasseggeri":
-          numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
+          numVar(req.body.queryResult.parameters.Num_passeggeri, 0);
           respJSON2 = { 
             /*"outputContexts": [
             {
