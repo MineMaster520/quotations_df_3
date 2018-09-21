@@ -121,6 +121,8 @@ server.post('/webhook',function (req,res)  {
         
     } catch(err) {
 
+      res.json('fulfillmentText': err);
+
       /*switch(req.body.queryResult.intent.displayName) {
         case "Agente"
       }
