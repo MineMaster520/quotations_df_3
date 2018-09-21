@@ -138,7 +138,7 @@ server.post('/webhook',function (req,res)  {
       }};
       break;
       case "Agente-NumeroPasseggeri":
-          //numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
+          numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = { 
             "parameters": {
               "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
