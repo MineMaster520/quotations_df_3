@@ -169,7 +169,7 @@ server.post('/webhook',function (req,res)  {
                         }
                     };
           break;
-        case default:
+        default:
           break;  
       }
 
