@@ -55,7 +55,7 @@ server.post('/webhook',function (req,res)  {
                     "optionInfo": {
                       "key": "first title key"
                     },
-                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numPasseggeri,
+                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... ",
                     "image": {
                       "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                       "accessibilityText": bodyJSON['0']['categoryName']
@@ -137,6 +137,7 @@ server.post('/webhook',function (req,res)  {
         }
       }};
       break;
+
       case "Agente-NumeroPasseggeri":
           numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = { 
@@ -151,6 +152,7 @@ server.post('/webhook',function (req,res)  {
               }
             }};
             break;
+
             case "Agente-CittaDiPartenza":
             respJSON2 = {"parameters": {
               "geo_city": req.body.queryResult.parameters.geo_city,
@@ -164,10 +166,11 @@ server.post('/webhook',function (req,res)  {
               }
             }};
             break;
+
             case "Agente-GiornoPartenza":
             respJSON2 = {"parameters": {
               "date": req.body.queryResult.parameters.date
-            }"fulfillmentText": "Per che ora gradirebbe partire ?",
+            },"fulfillmentText": "Per che ora gradirebbe partire ?",
             "followupEventInput": {
               "name": "Agente-GiornoPartenza",
               "languageCode": "it-IT",
@@ -176,10 +179,11 @@ server.post('/webhook',function (req,res)  {
               }
             }};
             break;
+
             case "Agente-OraPartenza":
             respJSON2 = {"parameters": {
               "time": req.body.queryResult.parameters.time
-            }"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?",
+            },"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?",
             "followupEventInput": {
               "name": "Agente-OraPartenza",
               "languageCode": "it-IT",
