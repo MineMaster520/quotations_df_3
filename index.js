@@ -125,7 +125,7 @@ server.post('/webhook',function (req,res)  {
 
       var respJSON2 = {};
 
-      switch(req.body.queryResult.intent.displayName) {
+      /*switch(req.body.queryResult.intent.displayName) {
         case "Agente_Destinazione":
           respJSON2 = {"fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?",
                       "followupEventInput": {
@@ -177,7 +177,7 @@ server.post('/webhook',function (req,res)  {
                           }
                       }};
             
-      }
+      }*/
 
       
 
