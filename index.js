@@ -133,18 +133,21 @@ server.post('/webhook',function (req,res)  {
                           "name": "Agente_Destinazione",
                           "languageCode": "it-IT",
                           "parameters": {
-                            "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
+                            "param": "param value"
                           }
                       }};
           break;
         case "Agente-NumeroPasseggeri":
           //numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
-          respJSON2 = { "fulfillmentText": "Perfetto, mi dica da dove vuole partire.",
+          respJSON2 = { 
+            "parameters": {
+                  "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
+            },"fulfillmentText": "Perfetto, mi dica da dove vuole partire.",
                         "followupEventInput": {
                           "name": "Agente-NumeroPasseggeri",
                           "languageCode": "it-IT",
                           "parameters": {
-                            "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
+                            "param": "param_value"
                           }
                       }};
           break;
