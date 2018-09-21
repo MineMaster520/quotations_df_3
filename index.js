@@ -12,13 +12,15 @@ let errorResposne = {
     results: []
 };
 
+//Agente_Destinazione.Agente_Destinazione-yes.Agente-NumeroPasseggeri-yes.Agente-CittaDiPartenza-yes.Agente-GiornoPartenza-yes.Agente-OraPartenza-yes
+
 var port = process.env.PORT || 8080;
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
 server.post('/webhook',function (req,res)  {
 
-    if(req.body.queryResult.parameters.email != null) {
+    if(req.body.queryResult.intent.displayName == Agente-Mail) {
 
         superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
         .end((err, resp) => {
@@ -56,7 +58,7 @@ server.post('/webhook',function (req,res)  {
                               "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                               "accessibilityText": bodyJSON['0']['categoryName']
                             },
-                            "title": req.body.queryResult.parameters.email
+                            "title": "req.body.queryResult.parameters.email"
                           },
                           {
                             "optionInfo": {
