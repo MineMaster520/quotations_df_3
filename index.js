@@ -122,10 +122,8 @@ server.post('/webhook',function (req,res)  {
         
     } else {
 
-      let response2 = " ";
-      let respJSON2 = {
-                        'fulfillmentText': response
-                      }
+      var response2 = " ";
+      var respJSON2 = { 'fulfillmentText': response };
 
 
       return res.json(respJSON2);
