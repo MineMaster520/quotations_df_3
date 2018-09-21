@@ -167,8 +167,9 @@ server.post('/webhook',function (req,res)  {
               "lifespanCount": 2,
               "parameters": {
                 "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
+              }
             }
-        }
+        
           ],
             "fulfillmentText": "Perfetto, mi dica da dove vuole partire.",
             "followupEventInput": {
@@ -182,10 +183,6 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente-CittaDiPartenza":
             respJSON2 = {
-              "parameters": {
-                "geo_city": req.body.queryResult.parameters.geo_city,
-                "street-address": req.body.queryResult.parameters.street-address
-            },
             "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?",
             "followupEventInput": {
               "name": "Agente-CittaDiPartenza",
