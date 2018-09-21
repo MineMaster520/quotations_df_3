@@ -55,7 +55,7 @@ server.post('/webhook',function (req,res)  {
                     "optionInfo": {
                       "key": "first title key"
                     },
-                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... ",
+                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numPasseggeri,
                     "image": {
                       "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                       "accessibilityText": bodyJSON['0']['categoryName']
@@ -150,7 +150,7 @@ server.post('/webhook',function (req,res)  {
       break;
 
       case "Agente-NumeroPasseggeri":
-          //numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
+          numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = { 
             /*"outputContexts": [
             {
