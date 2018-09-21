@@ -15,7 +15,7 @@ let errorResposne = {
 //Agente_Destinazione.Agente_Destinazione-yes.Agente-NumeroPasseggeri-yes.Agente-CittaDiPartenza-yes.Agente-GiornoPartenza-yes.Agente-OraPartenza-yes
 
 var port = process.env.PORT || 8080;
-var numPass;
+var numPass = "";
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
