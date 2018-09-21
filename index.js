@@ -126,7 +126,7 @@ server.post('/webhook',function (req,res)  {
       switch(req.body.queryResult.intent.displayName) {
         case "Agente_Destinazione":
           respJSON2 = {"followupEventInput": {
-                          "name": "Agente-NumeroPasseggeri",
+                          "name": "Agente_Destinazione",
                           "languageCode": "it-IT",
                           "parameters": {
                             "param": "param value"
@@ -135,7 +135,7 @@ server.post('/webhook',function (req,res)  {
           break;
         case "Agente-NumeroPasseggeri":
           respJSON2 = {"followupEventInput": {
-                          "name": "Agente-CittaDiPartenza",
+                          "name": "Agente-NumeroPasseggeri",
                           "languageCode": "it-IT",
                           "parameters": {
                             "param": "param value"
@@ -144,7 +144,7 @@ server.post('/webhook',function (req,res)  {
           break;
         case "Agente-CittaDiPartenza":
           respJSON2 = {"followupEventInput": {
-                          "name": "Agente-GiornoPartenza",
+                          "name": "Agente-CittaDiPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
                             "param": "param value"
@@ -153,7 +153,7 @@ server.post('/webhook',function (req,res)  {
           break;
         case "Agente-GiornoPartenza":
           respJSON2 = {"followupEventInput": {
-                          "name": "Agente-OraPartenza",
+                          "name": "Agente-GiornoPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
                             "param": "param value"
@@ -162,7 +162,7 @@ server.post('/webhook',function (req,res)  {
           break;
         case "Agente-OraPartenza":
           respJSON2 = {"followupEventInput": {
-                          "name": "Agente-Mail",
+                          "name": "Agente-OraPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
                             "param": "param value"
