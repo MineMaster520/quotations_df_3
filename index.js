@@ -122,13 +122,7 @@ server.post('/webhook',function (req,res)  {
         
     } else {
 
-      if(!req.body.queryResult.allRequiredParamsPresent) {
-         var response2 = " ";
-         var respJSON2 = { 'fulfillmentText': response2 };
-
-
-          return res.json(respJSON2);
-      }
+      return;
     }
 
 
