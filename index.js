@@ -21,14 +21,6 @@ const server = express();
 server.use(bodyParser.json());
 server.post('/webhook',function (req,res)  {
 
-  function numVar(num, bool) {
-    if (bool == 0) {
-      numPass = num;
-    } else {
-      return numPass;
-    }
-  }
-
 
   if(req.body.queryResult.intent.displayName == "Agente-Mail") {
 
@@ -63,7 +55,7 @@ server.post('/webhook',function (req,res)  {
                     "optionInfo": {
                       "key": "first title key"
                     },
-                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numVar(20,1),
+                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numPass,
                     "image": {
                       "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                       "accessibilityText": bodyJSON['0']['categoryName']
@@ -158,7 +150,7 @@ server.post('/webhook',function (req,res)  {
       break;
 
       case "Agente-NumeroPasseggeri":
-          numVar(req.body.queryResult.parameters.Num_passeggeri, 0);
+          numPass = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = { 
             /*"outputContexts": [
             {
