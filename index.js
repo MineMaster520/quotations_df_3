@@ -127,9 +127,7 @@ server.post('/webhook',function (req,res)  {
 
       switch(req.body.queryResult.intent.displayName) {
         case "Agente_Destinazione":
-          respJSON2 = {/*"agentToAssistantDebug": {
-                        "agentToAssistantJson": "{}"
-                      },*/
+          respJSON2 = {"fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?",
                       "followupEventInput": {
                           "name": "Agente_Destinazione",
                           "languageCode": "it-IT",
@@ -140,7 +138,8 @@ server.post('/webhook',function (req,res)  {
           break;
         case "Agente-NumeroPasseggeri":
           numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
-          respJSON2 = {"followupEventInput": {
+          respJSON2 = { "fulfillmentText": "Perfetto, mi dica da dove vuole partire.",
+            "followupEventInput": {
                           "name": "Agente-NumeroPasseggeri",
                           "languageCode": "it-IT",
                           "parameters": {
@@ -149,7 +148,8 @@ server.post('/webhook',function (req,res)  {
                       }};
           break;
         case "Agente-CittaDiPartenza":
-          respJSON2 = {"followupEventInput": {
+          respJSON2 = {"fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?",
+            "followupEventInput": {
                           "name": "Agente-CittaDiPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
@@ -158,7 +158,8 @@ server.post('/webhook',function (req,res)  {
                       }};
           break;
         case "Agente-GiornoPartenza":
-          respJSON2 = {"followupEventInput": {
+          respJSON2 = {"fulfillmentText": "Per che ora gradirebbe partire ?",
+            "followupEventInput": {
                           "name": "Agente-GiornoPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
@@ -167,7 +168,8 @@ server.post('/webhook',function (req,res)  {
                       }};
           break;
         case "Agente-OraPartenza":
-          respJSON2 = {"followupEventInput": {
+          respJSON2 = {"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?",
+            "followupEventInput": {
                           "name": "Agente-OraPartenza",
                           "languageCode": "it-IT",
                           "parameters": {
