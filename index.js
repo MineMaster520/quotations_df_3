@@ -128,7 +128,18 @@ server.post('/webhook',function (req,res)  {
     switch(req.body.queryResult.intent.displayName) {
 
       case "Agente_Destinazione":
-      respJSON2 = {"fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?",
+      respJSON2 = {
+        "outputContexts": [
+            {
+              "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente_destinazione-followup",
+              "lifespanCount": 2,
+              "parameters": {
+                "street-address1": req.body.queryResult.parameters.street-address1,
+                "geo-city1": req.body.queryResult.parameters.geo-city1
+              }
+            }
+          ],
+        "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?",
       "followupEventInput": {
         "name": "Agente_Destinazione",
         "languageCode": "it-IT",
@@ -139,11 +150,27 @@ server.post('/webhook',function (req,res)  {
       break;
 
       case "Agente-NumeroPasseggeri":
-          numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
+          //numPasseggeri = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = { 
-            "parameters": {
-              "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
-            },"fulfillmentText": "Perfetto, mi dica da dove vuole partire.",
+            "outputContexts": [
+            {
+              "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente_destinazione-followup",
+              "lifespanCount": 1,
+              "parameters": {
+                "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri,
+                "geo-city1": req.body.queryResult.parameters.geo-city1,
+                "street-address1": req.body.queryResult.parameters.street-address1
+              }
+            },
+            {
+              "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente-numeropasseggeri-followup",
+              "lifespanCount": 2,
+              "parameters": {
+                "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
+            }
+        }
+          ],
+            "fulfillmentText": "Perfetto, mi dica da dove vuole partire.",
             "followupEventInput": {
               "name": "Agente-NumeroPasseggeri",
               "languageCode": "it-IT",
@@ -154,10 +181,12 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-CittaDiPartenza":
-            respJSON2 = {"parameters": {
-              "geo_city": req.body.queryResult.parameters.geo_city,
-              "street-address": req.body.queryResult.parameters.street-address
-            },"fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?",
+            respJSON2 = {
+              "parameters": {
+                "geo_city": req.body.queryResult.parameters.geo_city,
+                "street-address": req.body.queryResult.parameters.street-address
+            },
+            "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?",
             "followupEventInput": {
               "name": "Agente-CittaDiPartenza",
               "languageCode": "it-IT",
