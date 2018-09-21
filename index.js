@@ -20,7 +20,7 @@ const server = express();
 server.use(bodyParser.json());
 server.post('/webhook',function (req,res)  {
 
-    if(req.body.queryResult.action == Agente_Destinazione.Agente_Destinazione-yes.Agente-NumeroPasseggeri-yes.Agente-CittaDiPartenza-yes.Agente-GiornoPartenza-yes.Agente-OraPartenza-yes) {
+    if(req.body.queryResult.parameters.email) {
 
         superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
         .end((err, resp) => {
@@ -120,6 +120,10 @@ server.post('/webhook',function (req,res)  {
         
 
         
+    } else {
+
+
+      res.send("no");
     }
 
 
