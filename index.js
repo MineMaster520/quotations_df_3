@@ -20,7 +20,6 @@ const server = express();
 server.use(bodyParser.json());
 server.post('/webhook',function (req,res)  {
 
-  var numPasseggeri = "ciao";
 
   if(req.body.queryResult.intent.displayName == "Agente-Mail") {
 
