@@ -123,7 +123,7 @@ server.post('/webhook',function (req,res)  {
     } else {
 
 
-      res.send("no");
+      
     }
 
 
