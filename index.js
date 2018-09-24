@@ -216,7 +216,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-Conferma":
-            respJSON2 = {
+            respJSON2 = /*{
               "payload": {
                 "google": {
                   "expectUserResponse": true,
@@ -224,7 +224,7 @@ server.post('/webhook',function (req,res)  {
                     "items": [
                       {
                         "simpleResponse": {
-                          "textToSpeech": "This is a Basic Card:"
+                          "textToSpeech": "Riepilogo richiesta preventivo:"
                         }
                       },
                       {
@@ -249,7 +249,23 @@ server.post('/webhook',function (req,res)  {
                   }
                 }
               }
-            };
+            }*/
+            {
+            "payload": {
+              "google": {
+                "expectUserResponse": true,
+                "systemIntent": {
+                  "intent": "actions.intent.CONFIRMATION",
+                  "data": {
+                    "@type": "type.googleapis.com/google.actions.v2.ConfirmationValueSpec",
+                    "dialogSpec": {
+                      "requestConfirmationText": "Please confirm your order."
+                    }
+                  }
+                }
+              }
+            }
+          };
             
           }
 
