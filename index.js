@@ -217,7 +217,7 @@ server.post('/webhook',function (req,res)  {
                       {
                         "basicCard": {
                           "title": "Conferma dati",
-                          "formattedText": "**Città di partenza**: " + partCity + "  " + "**Città di arrivo**: " + destCity + "  **Numero passeggeri**: " + numPass,
+                          "formattedText": "**Città di partenza**: " + partCity + "  " + "&nbsp;&nbsp;**Città di arrivo**: " + destCity + "  **Numero passeggeri**: " + numPass,
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
