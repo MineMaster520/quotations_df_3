@@ -218,6 +218,20 @@ server.post('/webhook',function (req,res)  {
                 "fulfillmentText": "La data di partenza è stata cambiata. A che ora deve partire?"
               };
             break;
+
+            case "Agente-OraPartenza-no":
+              oraPart = req.body.queryResult.parameters.time;
+              respJSON2 = {
+                "fulfillmentText": "L'ora di partenza è stata modificata. Mi potrebbe dire il suo indirizzo email?"
+              };
+            break;
+
+            /*case "Agente-Mail-no":
+              mail = req.body.queryResult.parameters.email;
+              respJSON2 = {
+                "fulfillmentText": "L'indirizzo"
+              };
+            break;*/
             
     }
 
