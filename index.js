@@ -138,33 +138,8 @@ server.post('/webhook',function (req,res)  {
       case "Agente-NumeroPasseggeri":
           numPass = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = { 
-            /*"outputContexts": [
-            {
-              "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente_destinazione-followup",
-              "lifespanCount": 1,
-              "parameters": {
-                "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri,
-                "geo-city1": req.body.queryResult.parameters.geo-city1,
-                "street-address1": req.body.queryResult.parameters.street-address1
-              }
-            },
-            {
-              "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente-numeropasseggeri-followup",
-              "lifespanCount": 2,
-              "parameters": {
-                "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
-              }
-            }
-        
-          ],*/
             "fulfillmentText": "Perfetto, mi dica da dove vuole partire."
-            /*"followupEventInput": {
-              "name": "Agente-NumeroPasseggeri",
-              "languageCode": "it-IT",
-              "parameters": {
-                "param": "param_value"
-              }
-            }*/};
+          };
             break;
 
             case "Agente-CittaDiPartenza":
@@ -238,6 +213,13 @@ server.post('/webhook',function (req,res)  {
                   }
                 }
               }
+            };
+            break;
+
+            case "Agente_Destinazione-no":
+            destCity = req.body.queryResult.parameters.destinazione;
+            respJSON2 = {
+              "fulfillmentText": "La destinazione è stata cambiata. Per quante persone?"
             };
             
           }
