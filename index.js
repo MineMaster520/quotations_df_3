@@ -247,10 +247,10 @@ server.post('/webhook',function (req,res)  {
               };
             break;
 
-            /*case "Agente-Mail-no":
+            case "Agente-Mail-no":
               mail = req.body.queryResult.parameters.email;
               respJSON2 = listaVeicoli(1);
-            break;*/
+            break;
             
     }
 
