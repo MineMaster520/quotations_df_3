@@ -214,7 +214,7 @@ server.post('/webhook',function (req,res)  {
                           "textToSpeech": "Riepilogo richiesta preventivo:"
                         }
                       },
-                      {
+                      /*{
                         "basicCard": {
                           "title": "Città di partenza: " + mail + ", città arrivo: " + destCity,
                           "image": {
@@ -231,8 +231,8 @@ server.post('/webhook',function (req,res)  {
                           ],
                           "imageDisplayOptions": "WHITE"
                         }
-                      }
-                      /*{
+                      }*/
+                      {
                         "tableCard": {
                           "title": "AoG Table Card title",
                           "subtitle": "AoG Table Card subtitle",
@@ -304,7 +304,7 @@ server.post('/webhook',function (req,res)  {
                             }
                           ]
                         }
-                      }*/
+                      }
                     ]
                   }
                 }
