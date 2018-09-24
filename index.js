@@ -113,7 +113,7 @@ server.post('/webhook',function (req,res)  {
     switch(req.body.queryResult.intent.displayName) {
 
       case "Agente_Destinazione":
-        destCity = req.body.queryResult.parameters.geo-city1;
+        destCity = req.body.queryResult.parameters.destinazione;
         respJSON2 = {
           /*"outputContexts": [
               {
