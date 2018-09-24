@@ -211,7 +211,7 @@ server.post('/webhook',function (req,res)  {
                       },
                       {
                         "basicCard": {
-                          "title": "Città di partenza: " + partCity,
+                          "title": "Città di partenza: " + numPass,
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
