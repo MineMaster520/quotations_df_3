@@ -18,6 +18,8 @@ var port = process.env.PORT || 8080;
 var numPass = "";
 var partCity = "";
 var destCity = "";
+var dataPart = "";
+var oraPart = "";
 var mail = "";
 // create serve and configure it.
 const server = express();
@@ -115,24 +117,8 @@ server.post('/webhook',function (req,res)  {
       case "Agente_Destinazione":
         destCity = req.body.queryResult.parameters.destinazione;
         respJSON2 = {
-          /*"outputContexts": [
-              {
-                "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente_destinazione-followup",
-                "lifespanCount": 2,
-                "parameters": {
-                  "street-address1": req.body.queryResult.parameters.street-address1,
-                  "geo-city1": req.body.queryResult.parameters.geo-city1
-                }
-              }
-            ],*/
           "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?"
-        /*"followupEventInput": {
-          "name": "Agente_Destinazione",
-          "languageCode": "it-IT",
-          "parameters": {
-            "param": "param value"
-          }
-        }*/};
+        };
       break;
 
       case "Agente-NumeroPasseggeri":
@@ -146,24 +132,13 @@ server.post('/webhook',function (req,res)  {
             partCity = req.body.queryResult.parameters.partenza;
             respJSON2 = {
             "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
-            /*"followupEventInput": {
-              "name": "Agente-CittaDiPartenza",
-              "languageCode": "it-IT",
-              "parameters": {
-                "param": "param value"
-              }
-            }*/};
+            };
             break;
 
             case "Agente-GiornoPartenza":
+            dataPart = req.body.queryResult.parameters.date;
             respJSON2 = {"fulfillmentText": "Per che ora gradirebbe partire ?"
-            /*"followupEventInput": {
-              "name": "Agente-GiornoPartenza",
-              "languageCode": "it-IT",
-              "parameters": {
-                "param": "param value"
-              }
-            }*/};
+            };
             break;
 
             case "Agente-OraPartenza":
@@ -192,7 +167,7 @@ server.post('/webhook',function (req,res)  {
                       {
                         "basicCard": {
                           "title": "Conferma dati",
-                          "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Numero passeggeri**: " + numPass,
+                          "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Data**: " + dataPart + "\n  \n**Passeggeri**: " + numPass,
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
