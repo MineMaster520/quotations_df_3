@@ -12,13 +12,10 @@ let errorResposne = {
     results: []
 };
 
+//Agente_Destinazione.Agente_Destinazione-yes.Agente-NumeroPasseggeri-yes.Agente-CittaDiPartenza-yes.Agente-GiornoPartenza-yes.Agente-OraPartenza-yes
+
 var port = process.env.PORT || 8080;
 var numPass = "";
-var destCity = "";
-var partCity = "";
-var giornoPart = "";
-var oraPart = "";
-var mail = "";
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
@@ -33,8 +30,6 @@ server.post('/webhook',function (req,res)  {
 
       var respBody = resp.text;
       var bodyJSON = JSON.parse(respBody);
-
-      //mail = req.body.queryResult.parameters.email;
 
       var respJSON = {
         "payload": {
@@ -60,7 +55,7 @@ server.post('/webhook',function (req,res)  {
                     "optionInfo": {
                       "key": "first title key"
                     },
-                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
+                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numPass,
                     "image": {
                       "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                       "accessibilityText": bodyJSON['0']['categoryName']
@@ -99,11 +94,28 @@ server.post('/webhook',function (req,res)  {
 
 
 
+        //if(bodyJSON['3']['price'] == undefined) {
+          //respJSON['payload']['google']['systemIntent']['data']['listSelect']['items'].remove(3);
+          /*var appFourth = {
+                            "optionInfo": {
+                              "key": "fourth"
+                            },
+                            "description": "Prezzo: € " + bodyJSON['3']['price'] + ", Info: " + bodyJSON['3']['info'],
+                            "image": {
+                              "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['3']['category'] + ".jpg",
+                              "accessibilityText": bodyJSON['3']['categoryName']
+                            },
+                            "title": "4° - " + bodyJSON['3']['categoryName']
+                          };
+
+                          respJSON.append(appFourth);*/
+        //}
 
 
         return res.json(respJSON);
 
 
+    //if(req.body.queryResult.)
 
   });
 
@@ -116,64 +128,94 @@ server.post('/webhook',function (req,res)  {
     switch(req.body.queryResult.intent.displayName) {
 
       case "Agente_Destinazione":
-        partCity = req.body.queryResult.parameters.geo-city1;
         respJSON2 = {
+          /*"outputContexts": [
+              {
+                "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente_destinazione-followup",
+                "lifespanCount": 2,
+                "parameters": {
+                  "street-address1": req.body.queryResult.parameters.street-address1,
+                  "geo-city1": req.body.queryResult.parameters.geo-city1
+                }
+              }
+            ],*/
           "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?"
-        };
+        /*"followupEventInput": {
+          "name": "Agente_Destinazione",
+          "languageCode": "it-IT",
+          "parameters": {
+            "param": "param value"
+          }
+        }*/};
       break;
 
       case "Agente-NumeroPasseggeri":
           numPass = req.body.queryResult.parameters.Num_passeggeri;
           respJSON2 = { 
+            /*"outputContexts": [
+            {
+              "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente_destinazione-followup",
+              "lifespanCount": 1,
+              "parameters": {
+                "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri,
+                "geo-city1": req.body.queryResult.parameters.geo-city1,
+                "street-address1": req.body.queryResult.parameters.street-address1
+              }
+            },
+            {
+              "name": "projects/${PROJECT_ID}/agent/sessions/${SESSION_ID}/contexts/agente-numeropasseggeri-followup",
+              "lifespanCount": 2,
+              "parameters": {
+                "Num_passeggeri": req.body.queryResult.parameters.Num_passeggeri
+              }
+            }
+        
+          ],*/
             "fulfillmentText": "Perfetto, mi dica da dove vuole partire."
-          };
+            /*"followupEventInput": {
+              "name": "Agente-NumeroPasseggeri",
+              "languageCode": "it-IT",
+              "parameters": {
+                "param": "param_value"
+              }
+            }*/};
             break;
 
             case "Agente-CittaDiPartenza":
-            partCity = req.body.queryResult.parameters.geo-city;
             respJSON2 = {
             "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
-            };
+            /*"followupEventInput": {
+              "name": "Agente-CittaDiPartenza",
+              "languageCode": "it-IT",
+              "parameters": {
+                "param": "param value"
+              }
+            }*/};
             break;
 
             case "Agente-GiornoPartenza":
-            giornoPart = req.body.queryResult.parameters.date;
             respJSON2 = {"fulfillmentText": "Per che ora gradirebbe partire ?"
-            };
+            /*"followupEventInput": {
+              "name": "Agente-GiornoPartenza",
+              "languageCode": "it-IT",
+              "parameters": {
+                "param": "param value"
+              }
+            }*/};
             break;
 
             case "Agente-OraPartenza":
-            oraPart = req.body.queryResult.parameters.time;
             respJSON2 = {"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?"
-            };
-            break;
-
-            case "Agente-Conferma":
-            respJSON2 = { "messages": [
-                {
-                  "buttons": [
-                    {
-                      "openUrlAction": {
-                        "url": "https://google.com"
-                      },
-                      "title": "Riepilogo richiesta preventivo"
-                    }
-                  ],
-                  "formattedText": "Descrizione conferma dati",
-                  "image": {
-                    "url": "http://imageUrl.com"
-                    "accessibilityText": "Image"
-                  },
-                  "platform": "google",
-                  "subtitle": "AoG Card Subtitle",
-                  "title": "AoG Card Title",
-                  "type": "basic_card"
-                }
-              ]
+            /*"followupEventInput": {
+              "name": "Agente-OraPartenza",
+              "languageCode": "it-IT",
+              "parameters": {
+                "param": "param value"
+              }
+            }*/};
             
-              };
-
           }
+
 
 
           return res.json(respJSON2);
