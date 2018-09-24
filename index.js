@@ -112,99 +112,107 @@ server.post('/webhook',function (req,res)  {
 
     switch(req.body.queryResult.intent.displayName) {
 
-      case "Agente_Destinazione":
-        destCity = req.body.queryResult.parameters.destinazione;
-        respJSON2 = {
-          "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?"
-        };
-      break;
+            case "Agente_Destinazione":
+              destCity = req.body.queryResult.parameters.destinazione;
+              respJSON2 = {
+                "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?"
+              };
+            break;
 
-      case "Agente-NumeroPasseggeri":
-          numPass = req.body.queryResult.parameters.Num_passeggeri;
-          respJSON2 = { 
-            "fulfillmentText": "Perfetto, mi dica da dove vuole partire."
-          };
+            case "Agente-NumeroPasseggeri":
+              numPass = req.body.queryResult.parameters.Num_passeggeri;
+              respJSON2 = { 
+                "fulfillmentText": "Perfetto, mi dica da dove vuole partire."
+              };
             break;
 
             case "Agente-CittaDiPartenza":
-            partCity = req.body.queryResult.parameters.partenza;
-            respJSON2 = {
-            "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
-            };
+              partCity = req.body.queryResult.parameters.partenza;
+              respJSON2 = {
+                "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
+              };
             break;
 
             case "Agente-GiornoPartenza":
-            dataPart = req.body.queryResult.parameters.date;
-            respJSON2 = {"fulfillmentText": "Per che ora gradirebbe partire ?"
-            };
+              dataPart = req.body.queryResult.parameters.date;
+              respJSON2 = {
+                "fulfillmentText": "Per che ora gradirebbe partire ?"
+              };
             break;
 
             case "Agente-OraPartenza":
-            oraPart = req.body.queryResult.parameters.time;
-            respJSON2 = {"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?"
-            };
+              oraPart = req.body.queryResult.parameters.time;
+              respJSON2 = {
+                "fulfillmentText": "Mi servirebbe cortesemente la sua mail ?"
+              };
             break;
 
             case "Agente-Conferma":
-            var temp = dataPart.substring(0,10);
-            dataPart = temp;
-            temp = oraPart.substring(11,16);
-            oraPart = temp;
+              var temp = dataPart.substring(0,10);
+              dataPart = temp;
+              temp = oraPart.substring(11,16);
+              oraPart = temp;
 
-            respJSON2 = {
-              "payload": {
-                "google": {
-                  "expectUserResponse": true,
-                  "richResponse": {
-                    "items": [
-                      {
-                        "simpleResponse": {
-                          "textToSpeech": "Riepilogo richiesta preventivo:"
-                        }
-                      },
-                      {
-                        "basicCard": {
-                          "title": "Conferma dati",
-                          "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
-                          /*"image": {
-                            "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-                            "accessibilityText": "Google Logo"
-                          },*/
-                          "buttons": [
-                            {
-                              "title": "Conferma",
-                              "openUrlAction": {
-                                "url": "https://www.google.com"
+              respJSON2 = {
+                "payload": {
+                  "google": {
+                    "expectUserResponse": true,
+                    "richResponse": {
+                      "items": [
+                        {
+                          "simpleResponse": {
+                            "textToSpeech": "Riepilogo richiesta preventivo:"
+                          }
+                        },
+                        {
+                          "basicCard": {
+                            "title": "Conferma dati",
+                            "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
+                            /*"image": {
+                              "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                              "accessibilityText": "Google Logo"
+                            },*/
+                            "buttons": [
+                              {
+                                "title": "Conferma",
+                                "openUrlAction": {
+                                  "url": "https://www.google.com"
+                                }
                               }
-                            }
-                          ],
-                          "imageDisplayOptions": "WHITE"
+                            ],
+                            "imageDisplayOptions": "WHITE"
+                          }
                         }
-                      }
-                      
-                    ]
+                        
+                      ]
+                    }
                   }
                 }
-              }
-            };
+              };
             break;
 
             case "Agente_Destinazione-no":
-            destCity = req.body.queryResult.parameters.destinazione;
-            respJSON2 = {
-              "fulfillmentText": "La destinazione è stata cambiata. Per quante persone?"
-            };
+              destCity = req.body.queryResult.parameters.destinazione;
+              respJSON2 = {
+                "fulfillmentText": "La destinazione è stata cambiata. Per quante persone?"
+              };
+            break;
+
+            case "Agente-NumeroPasseggeri-no":
+              numPass = req.body.queryResult.parameters.Num_passeggeri;
+              respJSON2 = {
+                "fulfillmentText": "Il numero di passeggeri è stato cambiato. Per che giorno avrebbe bisogno dell'auto?"
+              };
+            break;
             
-          }
+    }
 
 
 
           return res.json(respJSON2);
-        }
+  }
 
-
-
-      });
+});
 
 
 server.get('/getName',function (req,res){
