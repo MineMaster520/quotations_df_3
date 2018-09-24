@@ -214,9 +214,10 @@ server.post('/webhook',function (req,res)  {
                           "textToSpeech": "Riepilogo richiesta preventivo:"
                         }
                       },
-                      /*{
+                      {
                         "basicCard": {
                           "title": "Città di partenza: " + mail + ", città arrivo: " + destCity,
+                          "formattedText": "Descrizione di prova formattata",
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
@@ -231,80 +232,8 @@ server.post('/webhook',function (req,res)  {
                           ],
                           "imageDisplayOptions": "WHITE"
                         }
-                      }*/
-                      {
-                        "tableCard": {
-                          "title": "AoG Table Card title",
-                          "subtitle": "AoG Table Card subtitle",
-                          "image": {
-                            "url": "",
-                            "accessibilityText": "Image description for screen readers"
-                          },
-                          "columnProperties": [
-                            {
-                              "header": "Header 1"
-                            },
-                            {
-                              "header": "Header 2",
-                              "horizontalAlignment": "CENTER"
-                            },
-                            {
-                              "header": "Header 3",
-                              "horizontalAlignment": "CENTER"
-                            }
-                          ],
-                          "rows": [
-                            {
-                              "cells": [
-                                {
-                                  "text": "Cell A1"
-                                },
-                                {
-                                  "text": "Cell A2"
-                                },
-                                {
-                                  "text": "Cell A3"
-                                },
-                                "dividerAfter": true
-                              ]
-                            },
-                            {
-                              "cells": [
-                                {
-                                  "text": "Cell B1"
-                                },
-                                {
-                                  "text": "Cell B2"
-                                },
-                                {
-                                  "text": "Cell B3"
-                                }
-                              ]
-                            },
-                            {
-                              "cells": [
-                                {
-                                  "text": "Cell C1"
-                                },
-                                {
-                                  "text": "Cell C2"
-                                },
-                                {
-                                  "text": "Cell C3"
-                                }
-                              ]
-                            }
-                          ],
-                          "buttons": [
-                            {
-                              "title": "Button title",
-                              "openUrlAction": {
-                                "url": ""
-                              }
-                            }
-                          ]
-                        }
                       }
+                      
                     ]
                   }
                 }
