@@ -17,6 +17,7 @@ let errorResposne = {
 var port = process.env.PORT || 8080;
 var numPass = "";
 var partCity = "";
+var destCity = "";
 var mail = "";
 // create serve and configure it.
 const server = express();
@@ -112,6 +113,7 @@ server.post('/webhook',function (req,res)  {
     switch(req.body.queryResult.intent.displayName) {
 
       case "Agente_Destinazione":
+        destCity = req.body.queryResult.parameters.geo-city1;
         respJSON2 = {
           /*"outputContexts": [
               {
@@ -214,7 +216,7 @@ server.post('/webhook',function (req,res)  {
                       },
                       {
                         "basicCard": {
-                          "title": "Città di partenza: " + mail,
+                          "title": "Città di partenza: " + mail + ", città arrivo: " + destCity,
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
