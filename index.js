@@ -16,6 +16,7 @@ let errorResposne = {
 
 var port = process.env.PORT || 8080;
 var numPass = "";
+var partCity = "";
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
@@ -182,6 +183,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-CittaDiPartenza":
+            partCity = req.body.queryResult.parameters.geo-city1;
             respJSON2 = {
             "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
             /*"followupEventInput": {
@@ -216,7 +218,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-Conferma":
-            respJSON2 = /*{
+            respJSON2 = {
               "payload": {
                 "google": {
                   "expectUserResponse": true,
@@ -229,7 +231,7 @@ server.post('/webhook',function (req,res)  {
                       },
                       {
                         "basicCard": {
-                          "title": "Card Title",
+                          "title": "Città di partenza: " + partCity,
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
@@ -249,23 +251,7 @@ server.post('/webhook',function (req,res)  {
                   }
                 }
               }
-            }*/
-            {
-            "payload": {
-              "google": {
-                "expectUserResponse": true,
-                "systemIntent": {
-                  "intent": "actions.intent.CONFIRMATION",
-                  "data": {
-                    "@type": "type.googleapis.com/google.actions.v2.ConfirmationValueSpec",
-                    "dialogSpec": {
-                      "requestConfirmationText": "Please confirm your order."
-                    }
-                  }
-                }
-              }
-            }
-          };
+            };
             
           }
 
