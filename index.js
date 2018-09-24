@@ -19,24 +19,20 @@ var destCity = "";
 var dataPart = "";
 var oraPart = "";
 var mail = "";
+var bodyJSON = {};
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
 server.post('/webhook',function (req,res)  {
 
+  superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
+  .end((err, resp) => {
+    var respBody = resp.text;
+    bodyJSON = JSON.parse(respBody);
 
-  if(req.body.queryResult.intent.displayName == "Agente-Mail") {
+  });
 
-    superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
-    .end((err, resp) => {
-      if (err) { return console.log(err); }
-
-      mail = req.body.queryResult.parameters.email;
-
-      var respBody = resp.text;
-      var bodyJSON = JSON.parse(respBody);
-
-      function listaVeicoli(opz) {
+  function listaVeicoli(opz) {
         var opzText = "Scegli un'opzione";
         if(opz == 1) {
           opzText = "L'indirizzo email è stato cambiato. Scegli un'opzione";
@@ -105,7 +101,18 @@ server.post('/webhook',function (req,res)  {
 
         return respJSONtemp;
 
-      }
+  }
+
+  if(req.body.queryResult.intent.displayName == "Agente-Mail") {
+
+    superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
+    .end((err, resp) => {
+      if (err) { return console.log(err); }
+
+      mail = req.body.queryResult.parameters.email;
+
+      /*var respBody = resp.text;
+      var bodyJSON = JSON.parse(respBody);*/
 
       var respJSON = listaVeicoli(0);
 
