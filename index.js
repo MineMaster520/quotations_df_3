@@ -201,7 +201,21 @@ server.post('/webhook',function (req,res)  {
             case "Agente-NumeroPasseggeri-no":
               numPass = req.body.queryResult.parameters.Num_passeggeri;
               respJSON2 = {
-                "fulfillmentText": "Il numero di passeggeri è stato cambiato. Per che giorno avrebbe bisogno dell'auto?"
+                "fulfillmentText": "Il numero di passeggeri è stato cambiato. Da dove dovrebbe partire?"
+              };
+            break;
+
+            case "Agente-CittaDiPartenza-no":
+              partCity = req.body.queryResult.parameters.partenza;
+              respJSON2 = {
+                "fulfillmentText": "La città di partenza è stata cambiata. Che giorno vuole partire?"
+              };
+            break;
+
+            case "Agente-GiornoPartenza-no":
+              dataPart = req.body.queryResult.parameters.date;
+              respJSON2 = {
+                "fulfillmentText": "La data di partenza è stata cambiata. A che ora deve partire?"
               };
             break;
             
