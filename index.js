@@ -168,7 +168,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-CittaDiPartenza":
-            partCity = req.body.queryResult.parameters.geo-city;
+            partCity = req.body.queryResult.parameters.partenza;
             respJSON2 = {
             "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
             /*"followupEventInput": {
