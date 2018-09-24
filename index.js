@@ -17,6 +17,7 @@ let errorResposne = {
 var port = process.env.PORT || 8080;
 var numPass = "";
 var partCity = "";
+var mail = "";
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
@@ -28,6 +29,8 @@ server.post('/webhook',function (req,res)  {
     superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
     .end((err, resp) => {
       if (err) { return console.log(err); }
+
+      mail = req.body.queryResult.parameters.email;
 
       var respBody = resp.text;
       var bodyJSON = JSON.parse(respBody);
@@ -163,7 +166,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-CittaDiPartenza":
-            partCity = req.body.queryResult.parameters.geo-city;
+            //partCity = req.body.queryResult.parameters.geo-city;
             respJSON2 = {
             "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
             /*"followupEventInput": {
@@ -211,7 +214,7 @@ server.post('/webhook',function (req,res)  {
                       },
                       {
                         "basicCard": {
-                          "title": "Città di partenza: " + numPass,
+                          "title": "Città di partenza: " + mail,
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
