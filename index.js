@@ -55,7 +55,7 @@ server.post('/webhook',function (req,res)  {
                     "optionInfo": {
                       "key": "first title key"
                     },
-                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'] + " ... " + numPass,
+                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
                     "image": {
                       "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
                       "accessibilityText": bodyJSON['0']['categoryName']
@@ -213,6 +213,43 @@ server.post('/webhook',function (req,res)  {
                 "param": "param value"
               }
             }*/};
+            break;
+
+            case "Agente-Conferma":
+            respJSON2 = {
+              "payload": {
+                "google": {
+                  "expectUserResponse": true,
+                  "richResponse": {
+                    "items": [
+                      {
+                        "simpleResponse": {
+                          "textToSpeech": "This is a Basic Card:"
+                        }
+                      },
+                      {
+                        "basicCard": {
+                          "title": "Card Title",
+                          "image": {
+                            "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                            "accessibilityText": "Google Logo"
+                          },
+                          "buttons": [
+                            {
+                              "title": "Button Title",
+                              "openUrlAction": {
+                                "url": "https://www.google.com"
+                              }
+                            }
+                          ],
+                          "imageDisplayOptions": "WHITE"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            };
             
           }
 
