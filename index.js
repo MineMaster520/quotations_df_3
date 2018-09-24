@@ -34,7 +34,7 @@ server.post('/webhook',function (req,res)  {
       var respBody = resp.text;
       var bodyJSON = JSON.parse(respBody);
 
-      mail = req.body.queryResult.parameters.email;
+      //mail = req.body.queryResult.parameters.email;
 
       var respJSON = {
         "payload": {
