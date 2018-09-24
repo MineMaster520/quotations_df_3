@@ -171,8 +171,9 @@ server.post('/webhook',function (req,res)  {
                 }
               ]
             
-              }}
+              };
 
+          }
 
 
           return res.json(respJSON2);
