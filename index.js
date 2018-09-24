@@ -168,7 +168,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-CittaDiPartenza":
-            //partCity = req.body.queryResult.parameters.geo-city;
+            partCity = req.body.queryResult.parameters.geo-city;
             respJSON2 = {
             "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
             /*"followupEventInput": {
@@ -216,15 +216,15 @@ server.post('/webhook',function (req,res)  {
                       },
                       {
                         "basicCard": {
-                          "title": "Città di partenza: " + mail + ", città arrivo: " + destCity,
-                          "formattedText": "Descrizione di prova formattata",
+                          "title": "Conferma dati",
+                          "formattedText": "Città di partenza: " + partCity,
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
                           },
                           "buttons": [
                             {
-                              "title": "Button Title",
+                              "title": "Conferma",
                               "openUrlAction": {
                                 "url": "https://www.google.com"
                               }
