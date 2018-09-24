@@ -149,7 +149,7 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-Conferma":
-            respJSON2 = "messages": [
+            respJSON2 = { "messages": [
                 {
                   "buttons": [
                     {
@@ -171,7 +171,7 @@ server.post('/webhook',function (req,res)  {
                 }
               ]
             
-          }
+              }}
 
 
 
