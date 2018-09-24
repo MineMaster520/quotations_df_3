@@ -36,69 +36,83 @@ server.post('/webhook',function (req,res)  {
       var respBody = resp.text;
       var bodyJSON = JSON.parse(respBody);
 
-      var respJSON = {
-        "payload": {
-          "google": {
-            "expectUserResponse": true,
-            "richResponse": {
-              "items": [
-              {
-                "simpleResponse": {
-                  "textToSpeech": "Scegli un'opzione"
-                }
-              }
-              ]
-            },
-            "systemIntent": {
-              "intent": "actions.intent.OPTION",
-              "data": {
-                "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
-                "listSelect": {
-                  "title": "Veicoli disponibili",
-                  "items": [
-                  {
-                    "optionInfo": {
-                      "key": "first title key"
-                    },
-                    "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
-                    "image": {
-                      "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
-                      "accessibilityText": bodyJSON['0']['categoryName']
-                    },
-                    "title": "1° - " + bodyJSON['0']['categoryName']
-                  },
-                  {
-                    "optionInfo": {
-                      "key": "second"
-                    },
-                    "description": "Prezzo: € " + bodyJSON['1']['price'] + ", Info: " + bodyJSON['1']['info'],
-                    "image": {
-                      "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['1']['category'] + ".jpg",
-                      "accessibilityText": bodyJSON['1']['categoryName']
-                    },
-                    "title": "2° - " + bodyJSON['1']['categoryName']
-                  },
-                  {
-                    "optionInfo": {
-                      "key": "third"
-                    },
-                    "description": "Prezzo: € " + bodyJSON['2']['price'] + ", Info: " + bodyJSON['2']['info'],
-                    "image": {
-                      "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['2']['category'] + ".jpg",
-                      "accessibilityText": bodyJSON['2']['categoryName']
-                    },
-                    "title": "3° - " + bodyJSON['2']['categoryName']
+      function listaVeicoli(opz) {
+        var opzText = "Scegli un'opzione";
+        if(opz == 1) {
+          opzText = "L'indirizzo email è stato cambiato. Scegli un'opzione";
+        }
+
+        var respJSONtemp = {
+          "payload": {
+            "google": {
+              "expectUserResponse": true,
+              "richResponse": {
+                "items": [
+                {
+                  "simpleResponse": {
+                    "textToSpeech": opzText
                   }
-                  ]
+                }
+                ]
+              },
+              "systemIntent": {
+                "intent": "actions.intent.OPTION",
+                "data": {
+                  "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
+                  "listSelect": {
+                    "title": "Veicoli disponibili",
+                    "items": [
+                    {
+                      "optionInfo": {
+                        "key": "first title key"
+                      },
+                      "description": "Prezzo: € " + bodyJSON['0']['price'] + ", Info: " + bodyJSON['0']['info'],
+                      "image": {
+                        "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['0']['category'] + ".jpg",
+                        "accessibilityText": bodyJSON['0']['categoryName']
+                      },
+                      "title": "1° - " + bodyJSON['0']['categoryName']
+                    },
+                    {
+                      "optionInfo": {
+                        "key": "second"
+                      },
+                      "description": "Prezzo: € " + bodyJSON['1']['price'] + ", Info: " + bodyJSON['1']['info'],
+                      "image": {
+                        "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['1']['category'] + ".jpg",
+                        "accessibilityText": bodyJSON['1']['categoryName']
+                      },
+                      "title": "2° - " + bodyJSON['1']['categoryName']
+                    },
+                    {
+                      "optionInfo": {
+                        "key": "third"
+                      },
+                      "description": "Prezzo: € " + bodyJSON['2']['price'] + ", Info: " + bodyJSON['2']['info'],
+                      "image": {
+                        "url": "http://quote.moveolux.com:8080/assets/img/cars/c" + bodyJSON['2']['category'] + ".jpg",
+                        "accessibilityText": bodyJSON['2']['categoryName']
+                      },
+                      "title": "3° - " + bodyJSON['2']['categoryName']
+                    }
+                    ]
+                  }
                 }
               }
             }
           }
-        }
-      };
+        };
+
+        return respJSONtemp;
+
+      }
+
+      var respJSON = listaVeicoli(0);
+
+      
 
 
-        return res.json(respJSON);
+      return res.json(respJSON);
 
 
 
@@ -226,12 +240,10 @@ server.post('/webhook',function (req,res)  {
               };
             break;
 
-            /*case "Agente-Mail-no":
+            case "Agente-Mail-no":
               mail = req.body.queryResult.parameters.email;
-              respJSON2 = {
-                "fulfillmentText": "L'indirizzo"
-              };
-            break;*/
+              respJSON2 = listaVeicoli(1);
+            break;
             
     }
 
