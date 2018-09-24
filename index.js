@@ -148,8 +148,10 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-Conferma":
-            var temp = dataPart.substring(0,9);
+            var temp = dataPart.substring(0,10);
             dataPart = temp;
+            temp = oraPart.substring(12,16);
+            oraPart = temp;
             respJSON2 = {
               "payload": {
                 "google": {
