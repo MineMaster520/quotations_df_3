@@ -142,14 +142,9 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-OraPartenza":
+            oraPart = req.body.queryResult.parameters.time;
             respJSON2 = {"fulfillmentText": "Mi servirebbe cortesemente la sua mail ?"
-            /*"followupEventInput": {
-              "name": "Agente-OraPartenza",
-              "languageCode": "it-IT",
-              "parameters": {
-                "param": "param value"
-              }
-            }*/};
+            };
             break;
 
             case "Agente-Conferma":
@@ -167,7 +162,7 @@ server.post('/webhook',function (req,res)  {
                       {
                         "basicCard": {
                           "title": "Conferma dati",
-                          "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Data**: " + dataPart + "\n  \n**Passeggeri**: " + numPass,
+                          "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
                           "image": {
                             "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                             "accessibilityText": "Google Logo"
