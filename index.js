@@ -20,6 +20,9 @@ var oraPart = "";
 var mail = "";
 var bodyJSON = {};
 
+var distanzaPerc = "";
+var tempoPerc = "";
+
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
@@ -170,15 +173,23 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente-OraPartenza":
               oraPart = req.body.queryResult.parameters.time;
+              var temp2 = oraPart.substring(11,16);
+              oraPart = temp2;
+
               respJSON2 = {
                 "fulfillmentText": "Mi servirebbe cortesemente la sua mail?"
               };
             break;
 
             case "Agente-Conferma":
-              var temp2 = oraPart.substring(11,16);
-              oraPart = temp2;
+              superagent.get('http://quote.moveolux.com:88/home/testdistance?from=' + partCity + '&to=' + destCity)
+              .end((err, resp) => {
+                var respBody2 = resp.text;
+                var bodyJSON2 = JSON.parse(respBody2);
 
+                distanzaPerc = bodyJSON2['km'];
+                tempoPerc = bodyJSON2['time'];
+              });
               respJSON2 = {
                 "payload": {
                   "google": {
@@ -193,7 +204,7 @@ server.post('/webhook',function (req,res)  {
                         {
                           "basicCard": {
                             "title": "Conferma dati",
-                            "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
+                            "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPerc + ", **Durata prevista**: " + tempoPerc + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
                             /*"image": {
                               "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                               "accessibilityText": "Google Logo"
