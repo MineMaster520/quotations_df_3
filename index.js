@@ -182,7 +182,8 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-Conferma":
-              superagent.get('http://quote.moveolux.com:88/home/testdistance?from=' + partCity + '&to=' + destCity)
+              var urlDest = 'http://quote.moveolux.com:88/home/testdistance?from=' + partCity + '&to=' + destCity;
+              superagent.get(urlDest)
               .end((err, resp) => {
                 var respBody2 = resp.text;
                 var bodyJSON2 = JSON.parse(respBody2);
