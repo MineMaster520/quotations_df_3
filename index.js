@@ -148,7 +148,7 @@ server.post('/webhook',function (req,res)  {
               var quoteDate = new Date(dataPart);
               var todayDate = new Date();
 
-              if ((quoteDate.getTime() + 86400000) > todayDate.getTime()) {
+              if (quoteDate > todayDate) {
                 dataPart = req.body.queryResult.parameters.date;
                 respJSON2 = {
                 "fulfillmentText": "Per che ora gradirebbe partire?"
