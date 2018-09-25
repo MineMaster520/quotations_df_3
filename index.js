@@ -4,7 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('https');
 const superagent = require('superagent');
-
 var unirest = require("unirest");
 
 
@@ -20,6 +19,7 @@ var dataPart = "";
 var oraPart = "";
 var mail = "";
 var bodyJSON = {};
+
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
@@ -105,27 +105,15 @@ server.post('/webhook',function (req,res)  {
 
   if(req.body.queryResult.intent.displayName == "Agente-Mail") {
 
-    superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
-    .end((err, resp) => {
-      if (err) { return console.log(err); }
+    mail = req.body.queryResult.parameters.email;
 
-      mail = req.body.queryResult.parameters.email;
+    /*var respBody = resp.text;
+    var bodyJSON = JSON.parse(respBody);*/
 
-      /*var respBody = resp.text;
-      var bodyJSON = JSON.parse(respBody);*/
+    var respJSON = listaVeicoli(0);
+  
 
-      var respJSON = listaVeicoli(0);
-
-      
-
-
-      return res.json(respJSON);
-
-
-
-  });
-
-
+    return res.json(respJSON);
 
   } else {
 
@@ -136,7 +124,7 @@ server.post('/webhook',function (req,res)  {
             case "Agente_Destinazione":
               destCity = req.body.queryResult.parameters.destinazione;
               respJSON2 = {
-                "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto ?"
+                "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto?"
               };
             break;
 
@@ -150,21 +138,21 @@ server.post('/webhook',function (req,res)  {
             case "Agente-CittaDiPartenza":
               partCity = req.body.queryResult.parameters.partenza;
               respJSON2 = {
-                "fulfillmentText": "Bene !! Per quale giorno prenoterebbe l'auto ?"
+                "fulfillmentText": "Bene, per quale giorno prenoterebbe l'auto?"
               };
             break;
 
             case "Agente-GiornoPartenza":
               dataPart = req.body.queryResult.parameters.date;
               respJSON2 = {
-                "fulfillmentText": "Per che ora gradirebbe partire ?"
+                "fulfillmentText": "Per che ora gradirebbe partire?"
               };
             break;
 
             case "Agente-OraPartenza":
               oraPart = req.body.queryResult.parameters.time;
               respJSON2 = {
-                "fulfillmentText": "Mi servirebbe cortesemente la sua mail ?"
+                "fulfillmentText": "Mi servirebbe cortesemente la sua mail?"
               };
             break;
 
@@ -182,7 +170,7 @@ server.post('/webhook',function (req,res)  {
                       "items": [
                         {
                           "simpleResponse": {
-                            "textToSpeech": "Riepilogo richiesta preventivo:"
+                            "textToSpeech": "Riepilogo richiesta preventivo. Conferma?"
                           }
                         },
                         {
@@ -253,8 +241,6 @@ server.post('/webhook',function (req,res)  {
             break;
             
     }
-
-
 
           return res.json(respJSON2);
   }
