@@ -188,8 +188,8 @@ server.post('/webhook',function (req,res)  {
                 var respBody2 = resp.text;
                 var bodyJSON2 = JSON.parse(respBody2);
 
-                distanzaPerc = resp['km'];
-                tempoPerc = resp['time'];
+                distanzaPerc = bodyJSON2['km'];
+                tempoPerc = bodyJSON2['time'];
               });
               respJSON2 = {
                 "payload": {
