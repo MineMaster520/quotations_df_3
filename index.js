@@ -143,10 +143,22 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-GiornoPartenza":
-              dataPart = req.body.queryResult.parameters.date;
-              respJSON2 = {
+              var temp = dataPart.substring(0,10);
+              dataPart = temp;
+              var quoteDate = new Date(dataPart);
+              var todayDate = new Date();
+
+              if ((quoteDate.getTime() + 86400000) > todayDate.getTime()) {
+                dataPart = req.body.queryResult.parameters.date;
+                respJSON2 = {
                 "fulfillmentText": "Per che ora gradirebbe partire?"
-              };
+                };
+              } else {
+                respJSON2 = {
+                "fulfillmentText": "La data è troppo vicina ad oggi. Per che ora gradirebbe partire?"
+                };
+              }
+              
             break;
 
             case "Agente-OraPartenza":
@@ -157,10 +169,8 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-Conferma":
-              var temp = dataPart.substring(0,10);
-              dataPart = temp;
-              temp = oraPart.substring(11,16);
-              oraPart = temp;
+              var temp2 = oraPart.substring(11,16);
+              oraPart = temp2;
 
               respJSON2 = {
                 "payload": {
