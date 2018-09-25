@@ -143,13 +143,13 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-GiornoPartenza":
+              dataPart = req.body.queryResult.parameters.date;
               var temp = dataPart.substring(0,10);
               dataPart = temp;
               var quoteDate = new Date(dataPart);
               var todayDate = new Date();
 
-              if (quoteDate > todayDate) {
-                dataPart = req.body.queryResult.parameters.date;
+              if ((quoteDate.getTime() + 86400000) > todayDate.getTime()) {
                 respJSON2 = {
                 "fulfillmentText": "Per che ora gradirebbe partire?"
                 };
