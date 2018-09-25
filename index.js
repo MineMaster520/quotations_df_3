@@ -155,7 +155,14 @@ server.post('/webhook',function (req,res)  {
                 };
               } else {
                 respJSON2 = {
-                "fulfillmentText": "La data è troppo vicina ad oggi. Per che ora gradirebbe partire?"
+                  "fulfillmentText": "La data di partenza deve essere almeno domani. Per favore ripetere la data.",
+                  "followupEventInput": {
+                    "name": "Agente-GiornoPartenza",
+                    "languageCode": "it-IT",
+                    "parameters": {
+                      "param": "param value"
+                    }
+                  }
                 };
               }
               
