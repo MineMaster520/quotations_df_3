@@ -13,7 +13,11 @@ let errorResposne = {
 
 var port = process.env.PORT || 8080;
 var numPass = "";
+var partLoc = "";
+var partStreet = "";
 var partCity = "";
+var destLoc = "";
+var destStreet = "";
 var destCity = "";
 var dataPart = "";
 var oraPart = "";
@@ -125,6 +129,8 @@ server.post('/webhook',function (req,res)  {
     switch(req.body.queryResult.intent.displayName) {
 
             case "Agente_Destinazione":
+              destLoc = req.body.queryResult.parameters.luogo;
+              //destStreet = req.body.queryResult.parameters.street-address1;
               destCity = req.body.queryResult.parameters.destinazione;
               respJSON2 = {
                 "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto?"
