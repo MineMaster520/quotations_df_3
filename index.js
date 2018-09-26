@@ -282,8 +282,8 @@ server.post('/webhook',function (req,res)  {
               dataPart = req.body.queryResult.parameters.date;
 
               var temp3 = dataPart[0].substring(0,10);
-              var quoteDate3 = new Date(dataPart);
               dataPart = temp3;
+              var quoteDate3 = new Date(dataPart);
 
               /*respJSON2 = {
                 "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire? dataPart: " + dataPart
