@@ -229,7 +229,7 @@ server.post('/webhook',function (req,res)  {
                 var bodyJSON2 = JSON.parse(respBody2);
 
                 distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
-                var tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
+                tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
               });
 
