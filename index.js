@@ -252,12 +252,12 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente-GiornoPartenza-no":
               dataPart = req.body.queryResult.parameters.date;
-              var temp = dataPart.substring(0,10);
-              dataPart = temp;
-              var quoteDate = new Date(dataPart);
-              var todayDate = new Date();
+              var temp3 = dataPart.substring(0,10);
+              dataPart = temp3;
+              var quoteDate3 = new Date(dataPart);
+              var todayDate3 = new Date();
 
-              if ((quoteDate.getTime() + 86400000) > todayDate.getTime()) {
+              if ((quoteDate3.getTime() + 86400000) > todayDate3.getTime()) {
                 respJSON2 = {
                 "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire?"
                 };
