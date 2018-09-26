@@ -27,6 +27,8 @@ var bodyJSON = {};
 var distanzaPerc = "";
 var tempoPerc = "";
 
+var todayDate = new Date();
+
 // create serve and configure it.
 const server = express();
 server.use(bodyParser.json());
@@ -160,7 +162,6 @@ server.post('/webhook',function (req,res)  {
               var temp = dataPart.substring(0,10);
               dataPart = temp;
               var quoteDate = new Date(dataPart);
-              var todayDate = new Date();
 
               if ((quoteDate.getTime() + 86400000) > todayDate.getTime()) {
                 respJSON2 = {
@@ -283,13 +284,12 @@ server.post('/webhook',function (req,res)  {
               var temp3 = dataPart.substring(0,10);
               dataPart = temp3;
               var quoteDate3 = new Date(dataPart);
-              var todayDate3 = new Date();
 
-              respJSON2 = {
-                "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire? dataPart: " + dataPart + ", temp3: " + temp3 + ", quoteDate3: " + quoteDate3 + ", todayDate3: " + todayDate3
-              };
+              /*respJSON2 = {
+                "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire?"
+              };*/
 
-              /*if ((quoteDate3.getTime() + 86400000) > todayDate3.getTime()) {
+              if ((quoteDate3.getTime() + 86400000) > todayDate.getTime()) {
                 respJSON2 = {
                 "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire?"
                 };
@@ -304,7 +304,7 @@ server.post('/webhook',function (req,res)  {
                     }
                   }
                 };
-              }*/
+              }
             break;
 
             case "Agente-OraPartenza-no":
