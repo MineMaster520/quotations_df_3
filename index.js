@@ -279,15 +279,17 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente-GiornoPartenza-no":
               dataPart = req.body.queryResult.parameters.date;
-              respJSON2 = {
-                "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire?"
-              };
-              /*var temp3 = dataPart.substring(0,10);
+
+              var temp3 = dataPart.substring(0,10);
               dataPart = temp3;
               var quoteDate3 = new Date(dataPart);
               var todayDate3 = new Date();
 
-              if ((quoteDate3.getTime() + 86400000) > todayDate3.getTime()) {
+              respJSON2 = {
+                "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire? dataPart: " + dataPart + ", temp3: " + temp3 + ", quoteDate3: " + quoteDate3 + ", todayDate3: " + todayDate3
+              };
+
+              /*if ((quoteDate3.getTime() + 86400000) > todayDate3.getTime()) {
                 respJSON2 = {
                 "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire?"
                 };
