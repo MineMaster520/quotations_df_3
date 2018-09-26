@@ -223,6 +223,7 @@ server.post('/webhook',function (req,res)  {
               var tempoPercApi = "T";
 
               var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+              var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
               superagent.get(mapMatrixUrl)
               .end((err, resp) => {
@@ -232,12 +233,7 @@ server.post('/webhook',function (req,res)  {
                 distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
                 tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
-              });
-
-
-              var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
-
-              respJSON2 = {
+                respJSON2 = {
                 "payload": {
                   "google": {
                     "expectUserResponse": true,
@@ -251,7 +247,7 @@ server.post('/webhook',function (req,res)  {
                         {
                           "basicCard": {
                             "title": "Conferma dati",
-                            "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + /*"\n  \n**Indirizzo**: " + destStreet + "\n  \n**Luogo**: " + destLoc +*/ "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
+                            "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
                             "image": {
                               "url": mapUrl,
                               "accessibilityText": "Map"
@@ -273,6 +269,13 @@ server.post('/webhook',function (req,res)  {
                   }
                 }
               };
+
+              });
+
+
+          
+
+              
             break;
 
             case "Agente_Destinazione-no":
