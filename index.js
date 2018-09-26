@@ -218,8 +218,9 @@ server.post('/webhook',function (req,res)  {
               } else {
                 var partString = partCity;
               }
-              var distanzaPercApi = "";
-              var tempoPercApi = "";
+
+              var distanzaPercApi = "T";
+              var tempoPercApi = "T";
 
               var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
