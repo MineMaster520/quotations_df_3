@@ -198,6 +198,15 @@ server.post('/webhook',function (req,res)  {
                 distanzaPerc = bodyJSON2.km;
                 tempoPerc = bodyJSON2.time;
               });
+
+              if (destStreet != "") {
+                var destString = destStreet + ", " + destCity;
+              } else if (destStreet == "" && destLoc != "") {
+                var destString = destLoc + ", " + destCity;
+              } else {
+                var destString = destCity;
+              }
+
               respJSON2 = {
                 "payload": {
                   "google": {
@@ -212,7 +221,7 @@ server.post('/webhook',function (req,res)  {
                         {
                           "basicCard": {
                             "title": "Conferma dati",
-                            "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Città di arrivo**: " + destCity + "\n  \n**Indirizzo**: " + destStreet + "\n  \n**Luogo**: " + destLoc + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPerc + ", **Durata prevista**: " + tempoPerc + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
+                            "formattedText": "**Città di partenza**: " + partCity + "\n  \n**Destinazione**: " + destString + /*"\n  \n**Indirizzo**: " + destStreet + "\n  \n**Luogo**: " + destLoc +*/ "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPerc + ", **Durata prevista**: " + tempoPerc + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
                             /*"image": {
                               "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
                               "accessibilityText": "Google Logo"
