@@ -265,7 +265,7 @@ server.post('/webhook',function (req,res)  {
                 respJSON2 = {
                   "fulfillmentText": "La data di partenza deve essere successiva ad oggi. Per favore ripetere la data.",
                   "followupEventInput": {
-                    "name": "Agente-GiornoPartenza",
+                    "name": "Agente-GiornoPartenza-no",
                     "languageCode": "it-IT",
                     "parameters": {
                       "param": "param value"
