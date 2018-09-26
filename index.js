@@ -281,8 +281,8 @@ server.post('/webhook',function (req,res)  {
             case "Agente-GiornoPartenza-no":
               dataPart = req.body.queryResult.parameters.date;
 
-              var temp3 = dataPart.substring(0,10);
-              dataPart = temp3;
+              //var temp3 = dataPart.substring(0,10);
+              //dataPart = temp3;
               //var quoteDate3 = new Date(dataPart);
 
               respJSON2 = {
