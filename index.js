@@ -252,9 +252,27 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente-GiornoPartenza-no":
               dataPart = req.body.queryResult.parameters.date;
-              respJSON2 = {
-                "fulfillmentText": "La data di partenza è stata cambiata. A che ora deve partire?"
-              };
+              var temp = dataPart.substring(0,10);
+              dataPart = temp;
+              var quoteDate = new Date(dataPart);
+              var todayDate = new Date();
+
+              if ((quoteDate.getTime() + 86400000) > todayDate.getTime()) {
+                respJSON2 = {
+                "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire?"
+                };
+              } else {
+                respJSON2 = {
+                  "fulfillmentText": "La data di partenza deve essere successiva ad oggi. Per favore ripetere la data.",
+                  "followupEventInput": {
+                    "name": "Agente-GiornoPartenza",
+                    "languageCode": "it-IT",
+                    "parameters": {
+                      "param": "param value"
+                    }
+                  }
+                };
+              }
             break;
 
             case "Agente-OraPartenza-no":
