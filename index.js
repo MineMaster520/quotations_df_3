@@ -146,7 +146,10 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-CittaDiPartenza":
+              partLoc = req.body.queryResult.parameters.luogo_part;
+              partStreet = req.body.queryResult.parameters.indirizzo_part;
               partCity = req.body.queryResult.parameters.partenza;
+
               respJSON2 = {
                 "fulfillmentText": "Bene, per quale giorno prenoterebbe l'auto?"
               };
