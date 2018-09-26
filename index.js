@@ -226,7 +226,8 @@ server.post('/webhook',function (req,res)  {
                 var respBody2 = resp.text;
                 var bodyJSON2 = JSON.parse(respBody2);
 
-                
+                var distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
+                var tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
               });
 
@@ -247,7 +248,7 @@ server.post('/webhook',function (req,res)  {
                         {
                           "basicCard": {
                             "title": "Conferma dati",
-                            "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + /*"\n  \n**Indirizzo**: " + destStreet + "\n  \n**Luogo**: " + destLoc +*/ "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPerc + ", **Durata prevista**: " + tempoPerc + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
+                            "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + /*"\n  \n**Indirizzo**: " + destStreet + "\n  \n**Luogo**: " + destLoc +*/ "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
                             "image": {
                               "url": mapUrl,
                               "accessibilityText": "Map"
