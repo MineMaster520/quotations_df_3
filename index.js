@@ -130,8 +130,9 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente_Destinazione":
               destLoc = req.body.queryResult.parameters.luogo;
-              //destStreet = req.body.queryResult.parameters.street-address1;
+              destStreet = req.body.queryResult.parameters.street-address1;
               destCity = req.body.queryResult.parameters.destinazione;
+              
               respJSON2 = {
                 "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto?"
               };
