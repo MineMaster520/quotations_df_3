@@ -219,6 +219,8 @@ server.post('/webhook',function (req,res)  {
                 var partString = partCity;
               }
 
+              var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?center=Milan,ITALY&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+
               respJSON2 = {
                 "payload": {
                   "google": {
@@ -234,10 +236,10 @@ server.post('/webhook',function (req,res)  {
                           "basicCard": {
                             "title": "Conferma dati",
                             "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + /*"\n  \n**Indirizzo**: " + destStreet + "\n  \n**Luogo**: " + destLoc +*/ "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPerc + ", **Durata prevista**: " + tempoPerc + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
-                            /*"image": {
-                              "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-                              "accessibilityText": "Google Logo"
-                            },*/
+                            "image": {
+                              "url": mapUrl,
+                              "accessibilityText": "Map"
+                            },
                             "buttons": [
                               {
                                 "title": "Conferma",
