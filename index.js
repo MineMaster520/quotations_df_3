@@ -295,22 +295,8 @@ server.post('/webhook',function (req,res)  {
       partString = partCity;
     }
 
-    function findAndReplace(string, target, replacement) {
-     
-     var i = 0, length = string.length;
-     
-     for (i; i < length; i++) {
-     
-       string = string.replace(target, replacement);
-     
-     }
-     
-     return string;
-     
-    }
-
-    var partStringN = findAndReplace(partString, " ", "+");
-    var destStringN = findAndReplace(destString, " ", "+");
+    var partStringN = partString.replace(/\s/g, "+");
+    var destStringN = destString.replace(/\s/g, "+");
 
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partCity + ",ITALIA&destinations=" + destCity + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
      //Retrieve points path road
