@@ -200,6 +200,8 @@ server.post('/webhook',function (req,res)  {
             superagent.get(mapMatrixUrl)
               .end((err3, resp3) => {
 
+                boolWait = 1;
+
               var respBody2 = resp3.text;
               var bodyJSON2 = JSON.parse(respBody2);
 
@@ -266,7 +268,7 @@ server.post('/webhook',function (req,res)  {
 
               });
 
-
+              boolWait = 0;
           
 
               
