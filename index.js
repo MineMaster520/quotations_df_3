@@ -320,7 +320,7 @@ server.post('/webhook',function (req,res)  {
               var mapPointsUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|enc:" + pointsPath + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
                 
 
-              respJSONConf = {
+            var respJSONConf = {
                   "payload": {
                     "google": {
                       "expectUserResponse": true,
