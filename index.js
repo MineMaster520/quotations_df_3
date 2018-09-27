@@ -27,6 +27,9 @@ var bodyJSON = {};
 var distanzaPerc = "";
 var tempoPerc = "";
 
+var distanzaPercApi = "";
+var tempoPercApi = "";
+
 var todayDate = new Date();
 
 // create serve and configure it.
@@ -39,6 +42,17 @@ server.post('/webhook',function (req,res)  {
     var respBody = resp.text;
     bodyJSON = JSON.parse(respBody);
 
+  });
+
+  var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+
+  superagent.get(mapMatrixUrl).end((err3, resp3) => {
+
+    var respBody2 = resp3.text;
+    var bodyJSON2 = JSON.parse(respBody2);
+
+    distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
+    tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
   });
 
   function listaVeicoli(opz) {
@@ -127,7 +141,7 @@ server.post('/webhook',function (req,res)  {
   } else {
 
     var respJSON2 = {};
-    var boolWait = 1;
+    var boolWait = 0;
 
     switch(req.body.queryResult.intent.displayName) {
 
@@ -201,19 +215,6 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente-Conferma":
 
-              boolWait = 1;
-
-              var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
-
-              superagent.get(mapMatrixUrl)
-                .end((err3, resp3) => {
-
-                var respBody2 = resp3.text;
-                var bodyJSON2 = JSON.parse(respBody2);
-
-                var distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
-                var tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
-
                 if (destStreet != "") {
                   var destString = destStreet + ", " + destCity;
                 } else if (destStreet == "" && destLoc != "") {
@@ -271,10 +272,6 @@ server.post('/webhook',function (req,res)  {
                     }
                   }
                 };
-
-              });
-          
-              return res.json(respJSON2);
               
             break;
 
@@ -345,13 +342,8 @@ server.post('/webhook',function (req,res)  {
             
     }
 
-    while(boolWait == 1) {
-      
-    }
-
-    if(boolWait == 0) {
       return res.json(respJSON2);
-    }
+
           
   }
 
