@@ -49,27 +49,6 @@ server.post('/webhook',function (req,res)  {
 
   });
 
-  //Retrieve map distance and duration
-
-  function matrixMap(dest, part) {
-    var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + part + ",ITALIA&destinations=" + dest + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
-
-    let respBody5 = await request(superagent).get(mapMatrixUrl);
-    var respBody3 = respBody5.text;
-    var bodyJSON4 = JSON.parse(respBody3);
-
-    distanzaPercApi = bodyJSON4['rows']['0']['elements']['0']['distance']['text'];
-    tempoPercApi = bodyJSON4['rows']['0']['elements']['0']['duration']['text'];
-
-    /*superagent.get(mapMatrixUrl).end((err3, resp3) => {
-      var respBody2 = resp3.text;
-      var bodyJSON2 = JSON.parse(respBody2);
-
-      distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
-      tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
-    });*/
-
-  }
 
   //Retrieve points path road
   var urlPoints= "https://maps.googleapis.com/maps/api/directions/json?origin=Via+Cesare+Battisti+37,Vimodrone,ITALIA&destination=Metropolitana+Vimodrone,ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
@@ -162,7 +141,7 @@ server.post('/webhook',function (req,res)  {
 
     return res.json(respJSON);
 
-  } else {
+  } else if (req.body.queryResult.intent.displayName != "Agente-Conferma") {
 
     var respJSON2 = {};
     var boolWait = 0;
@@ -237,70 +216,6 @@ server.post('/webhook',function (req,res)  {
               boolWait = 0;
             break;
 
-            case "Agente-Conferma":
-
-                if (destStreet != "") {
-                  destString = destStreet + ", " + destCity;
-                } else if (destStreet == "" && destLoc != "") {
-                  destString = destLoc + ", " + destCity;
-                } else {
-                  destString = destCity;
-                }
-
-                if (partStreet != "") {
-                  partString = partStreet + ", " + partCity;
-                } else if (partStreet == "" && partLoc != "") {
-                  partString = partLoc + ", " + partCity;
-                } else {
-                  partString = partCity;
-                }
-              
-
-              var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
-
-              var mapPointsUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|enc:" + pointsPath + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
-                
-              matrixMap(destCity, partCity);
-
-              respJSON2 = {
-                  "payload": {
-                    "google": {
-                      "expectUserResponse": true,
-                      "richResponse": {
-                        "items": [
-                          {
-                            "simpleResponse": {
-                              "textToSpeech": "Riepilogo richiesta preventivo. Conferma?"
-                            }
-                          },
-                          {
-                            "basicCard": {
-                              "title": "Conferma dati",
-                              "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
-                              "image": {
-                                "url": mapPointsUrl,
-                                "accessibilityText": "Map"
-                              },
-                              "buttons": [
-                                {
-                                  "title": "Conferma",
-                                  "openUrlAction": {
-                                    "url": "https://www.google.com"
-                                  }
-                                }
-                              ],
-                              "imageDisplayOptions": "WHITE"
-                            }
-                          }
-                          
-                        ]
-                      }
-                    }
-                  }
-                };
-              
-            break;
-
             case "Agente_Destinazione-no":
               destCity = req.body.queryResult.parameters.destinazione;
               respJSON2 = {
@@ -371,7 +286,82 @@ server.post('/webhook',function (req,res)  {
       return res.json(respJSON2);
 
           
-  } 
+  } else if (req.body.queryResult.intent.displayName == "Agente-Conferma") {
+
+    if (destStreet != "") {
+      destString = destStreet + ", " + destCity;
+    } else if (destStreet == "" && destLoc != "") {
+      destString = destLoc + ", " + destCity;
+    } else {
+      destString = destCity;
+    }
+
+    if (partStreet != "") {
+      partString = partStreet + ", " + partCity;
+    } else if (partStreet == "" && partLoc != "") {
+      partString = partLoc + ", " + partCity;
+    } else {
+      partString = partCity;
+    }
+
+    var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partCity + ",ITALIA&destinations=" + destCity + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+
+    superagent.get(mapMatrixUrl).end((err3, resp3) => {
+      var respBody2 = resp3.text;
+      var bodyJSON2 = JSON.parse(respBody2);
+
+      distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
+      tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
+
+              
+
+              var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+
+              var mapPointsUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|enc:" + pointsPath + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+                
+
+              respJSONConf = {
+                  "payload": {
+                    "google": {
+                      "expectUserResponse": true,
+                      "richResponse": {
+                        "items": [
+                          {
+                            "simpleResponse": {
+                              "textToSpeech": "Riepilogo richiesta preventivo. Conferma?"
+                            }
+                          },
+                          {
+                            "basicCard": {
+                              "title": "Conferma dati",
+                              "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
+                              "image": {
+                                "url": mapPointsUrl,
+                                "accessibilityText": "Map"
+                              },
+                              "buttons": [
+                                {
+                                  "title": "Conferma",
+                                  "openUrlAction": {
+                                    "url": "https://www.google.com"
+                                  }
+                                }
+                              ],
+                              "imageDisplayOptions": "WHITE"
+                            }
+                          }
+                          
+                        ]
+                      }
+                    }
+                  }
+                };
+
+          return res.JSON(respJSONConf);
+
+    });
+
+  }
 
 });
 
