@@ -265,7 +265,7 @@ server.post('/webhook',function (req,res)  {
                               "title": "Conferma dati",
                               "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
                               "image": {
-                                "url": mapUrl,
+                                "url": mapPointsUrl,
                                 "accessibilityText": "Map"
                               },
                               "buttons": [
