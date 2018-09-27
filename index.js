@@ -58,8 +58,8 @@ server.post('/webhook',function (req,res)  {
     var respBody3 = respBody2.text;
     var bodyJSON2 = JSON.parse(respBody3);
 
-    distanzaPercApi = bodyJSON3['rows']['0']['elements']['0']['distance']['text'];
-    tempoPercApi = bodyJSON3['rows']['0']['elements']['0']['duration']['text'];
+    distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
+    tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
     /*superagent.get(mapMatrixUrl).end((err3, resp3) => {
       var respBody2 = resp3.text;
