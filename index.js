@@ -280,17 +280,17 @@ server.post('/webhook',function (req,res)  {
   } else if (req.body.queryResult.intent.displayName == "Agente-Conferma") {
 
     if (destStreet != "") {
-      destString = destStreet + ", " + destCity;
+      destString = destStreet + "," + destCity;
     } else if (destStreet == "" && destLoc != "") {
-      destString = destLoc + ", " + destCity;
+      destString = destLoc + "," + destCity;
     } else {
       destString = destCity;
     }
 
     if (partStreet != "") {
-      partString = partStreet + ", " + partCity;
+      partString = partStreet + "," + partCity;
     } else if (partStreet == "" && partLoc != "") {
-      partString = partLoc + ", " + partCity;
+      partString = partLoc + "," + partCity;
     } else {
       partString = partCity;
     }
