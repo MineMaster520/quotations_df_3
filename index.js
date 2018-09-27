@@ -50,16 +50,7 @@ server.post('/webhook',function (req,res)  {
   });
 
 
-  //Retrieve points path road
-  var urlPoints= "https://maps.googleapis.com/maps/api/directions/json?origin=Via+Cesare+Battisti+37,Vimodrone,ITALIA&destination=Metropolitana+Vimodrone,ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
-
-  superagent.get(urlPoints).end((err4, resp4) => {
-    var respBody2 = resp4.text;
-    var bodyJSON2 = JSON.parse(respBody2);
-
-    pointsPath = bodyJSON2['routes']['0']['overview_polyline']['points'];
-
-  });
+ 
 
   function listaVeicoli(opz) {
         var opzText = "Scegli un'opzione";
@@ -305,22 +296,31 @@ server.post('/webhook',function (req,res)  {
     }
 
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partCity + ",ITALIA&destinations=" + destCity + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+     //Retrieve points path road
+    var urlPoints= "https://maps.googleapis.com/maps/api/directions/json?origin=Via+Cesare+Battisti+37,Vimodrone,ITALIA&destination=Metropolitana+Vimodrone,ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+
 
     superagent.get(mapMatrixUrl).end((err3, resp3) => {
+      superagent.get(urlPoints).end((err4, resp4) => {
       var respBody2 = resp3.text;
       var bodyJSON2 = JSON.parse(respBody2);
 
       distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
       tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
+      var respBodyPath = resp4.text;
+      var bodyJSONPath = JSON.parse(respBodyPath);
+
+      pointsPath = bodyJSONPath['routes']['0']['overview_polyline']['points'];
+
               
 
-              var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+          var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
-              var mapPointsUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|enc:" + pointsPath + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+          var mapPointsUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|enc:" + pointsPath + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
                 
 
-            var respJSONConf = {
+          var respJSONConf = {
                   "payload": {
                     "google": {
                       "expectUserResponse": true,
@@ -358,6 +358,8 @@ server.post('/webhook',function (req,res)  {
                 };
 
           return res.json(respJSONConf);
+
+    });
 
     });
 
