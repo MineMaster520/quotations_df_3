@@ -127,6 +127,7 @@ server.post('/webhook',function (req,res)  {
   } else {
 
     var respJSON2 = {};
+    var boolWait = 0;
 
     switch(req.body.queryResult.intent.displayName) {
 
@@ -193,6 +194,8 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-Conferma":
+
+            boolWait = 1;
 
             superagent.get(mapMatrixUrl)
               .end((err3, resp3) => {
@@ -261,6 +264,8 @@ server.post('/webhook',function (req,res)  {
                     }
                   }
                 };
+
+                boolWait = 0;
 
               });
 
@@ -334,7 +339,14 @@ server.post('/webhook',function (req,res)  {
             
     }
 
-          return res.json(respJSON2);
+          if(boolWait == 0) {
+            return res.json(respJSON2);
+          } else {
+            while(boolWait == 1) {
+
+            }
+            return res.json(respJSON2);
+          }
   }
 
 });
