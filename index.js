@@ -300,7 +300,7 @@ server.post('/webhook',function (req,res)  {
 
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partStringN + ",ITALIA&destinations=" + destStringN + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
      //Retrieve points path road
-    var urlPoints= "https://maps.googleapis.com/maps/api/directions/json?origin=" + partStringN + ",ITALIA&destination=" + destStringN + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+    var urlPoints= "https://maps.googleapis.com/maps/api/directions/json?origin=Monza,ITALIA&destination=Milano,ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
 
     superagent.get(mapMatrixUrl).end((err3, resp3) => {
