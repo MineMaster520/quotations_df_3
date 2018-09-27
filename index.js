@@ -193,15 +193,15 @@ server.post('/webhook',function (req,res)  {
             break;
 
             case "Agente-Conferma":
-              var urlDest = 'http://quote.moveolux.com:88/home/testdistance?from=' + partCity + '&to=' + destCity;
-              superagent.get(urlDest)
-              .end((err, resp) => {
-                var respBody2 = resp.text;
-                var bodyJSON2 = JSON.parse(respBody2);
 
-                distanzaPerc = bodyJSON2.km;
-                tempoPerc = bodyJSON2.time;
-              });
+            superagent.get(mapMatrixUrl)
+              .end((err3, resp3) => {
+
+              var respBody2 = resp3.text;
+              var bodyJSON2 = JSON.parse(respBody2);
+
+              var distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
+              var tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
               if (destStreet != "") {
                 var destString = destStreet + ", " + destCity;
@@ -219,21 +219,13 @@ server.post('/webhook',function (req,res)  {
                 var partString = partCity;
               }
 
-              var distanzaPercApi = "T";
-              var tempoPercApi = "T";
-
               var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
               var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
-              superagent.get(mapMatrixUrl)
-              .end((err3, resp3) => {
-                var respBody2 = resp3.text;
-                var bodyJSON2 = JSON.parse(respBody2);
+              
+                
 
-                distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
-                tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
-
-                respJSON2 = {
+              respJSON2 = {
                   "payload": {
                     "google": {
                       "expectUserResponse": true,
