@@ -127,7 +127,7 @@ server.post('/webhook',function (req,res)  {
   } else {
 
     var respJSON2 = {};
-    var boolWait = 0;
+    var boolWait = 1;
 
     switch(req.body.queryResult.intent.displayName) {
 
@@ -139,6 +139,7 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto?"
               };
+              boolWait = 0;
             break;
 
             case "Agente-NumeroPasseggeri":
@@ -146,6 +147,7 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = { 
                 "fulfillmentText": "Perfetto, mi dica da dove vuole partire."
               };
+              boolWait = 0;
             break;
 
             case "Agente-CittaDiPartenza":
@@ -156,6 +158,7 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "Bene, per quale giorno prenoterebbe l'auto?"
               };
+              boolWait = 0;
             break;
 
             case "Agente-GiornoPartenza":
@@ -168,6 +171,7 @@ server.post('/webhook',function (req,res)  {
                 respJSON2 = {
                 "fulfillmentText": "Per che ora gradirebbe partire?"
                 };
+                boolWait = 0;
               } else {
                 respJSON2 = {
                   "fulfillmentText": "La data di partenza deve essere almeno domani. Per favore ripetere la data.",
@@ -179,6 +183,7 @@ server.post('/webhook',function (req,res)  {
                     }
                   }
                 };
+                boolWait = 0;
               }
               
             break;
@@ -191,6 +196,7 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "Mi servirebbe cortesemente la sua mail?"
               };
+              boolWait = 0;
             break;
 
             case "Agente-Conferma":
@@ -199,8 +205,6 @@ server.post('/webhook',function (req,res)  {
 
             superagent.get(mapMatrixUrl)
               .end((err3, resp3) => {
-
-                boolWait = 1;
 
               var respBody2 = resp3.text;
               var bodyJSON2 = JSON.parse(respBody2);
@@ -270,7 +274,7 @@ server.post('/webhook',function (req,res)  {
 
               boolWait = 0;
           
-
+              //return res.json(respJSON2);
               
             break;
 
@@ -279,6 +283,7 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "La destinazione è stata cambiata. Per quante persone?"
               };
+              boolWait = 0;
             break;
 
             case "Agente-NumeroPasseggeri-no":
@@ -286,6 +291,7 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "Il numero di passeggeri è stato cambiato. Da dove dovrebbe partire?"
               };
+              boolWait = 0;
             break;
 
             case "Agente-CittaDiPartenza-no":
@@ -293,6 +299,7 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "La città di partenza è stata cambiata. Che giorno vuole partire?"
               };
+              boolWait = 0;
             break;
 
             case "Agente-GiornoPartenza-no":
@@ -302,14 +309,11 @@ server.post('/webhook',function (req,res)  {
               dataPart = temp3;
               var quoteDate3 = new Date(dataPart);
 
-              /*respJSON2 = {
-                "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire? dataPart: " + dataPart
-              };*/
-
               if ((quoteDate3.getTime() + 86400000) > todayDate.getTime()) {
                 respJSON2 = {
                 "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire?"
                 };
+                boolWait = 0;
               } else {
                 respJSON2 = {
                   "fulfillmentText": "La data di partenza deve essere successiva ad oggi. Per favore ripetere la data.",
@@ -321,6 +325,7 @@ server.post('/webhook',function (req,res)  {
                     }
                   }
                 };
+                boolWait = 0;
               }
             break;
 
@@ -329,23 +334,26 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "L'ora di partenza è stata modificata. Mi potrebbe dire il suo indirizzo email?"
               };
+              boolWait = 0;
             break;
 
             case "Agente-Mail-no":
               mail = req.body.queryResult.parameters.email;
               respJSON2 = listaVeicoli(1);
+              boolWait = 0;
             break;
             
     }
 
-          if(boolWait == 0) {
-            return res.json(respJSON2);
-          } else {
-            while(boolWait == 1) {
+    if(boolWait == 0) {
+      return res.json(respJSON2);
+    } else {
+      while(boolWait == 1) {
 
-            }
-            return res.json(respJSON2);
-          }
+      }
+      return res.json(respJSON2);
+    }
+          
   }
 
 });
