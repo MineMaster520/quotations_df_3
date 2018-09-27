@@ -195,7 +195,7 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente-Conferma":
 
-            boolWait = 1;
+            var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
             superagent.get(mapMatrixUrl)
               .end((err3, resp3) => {
@@ -222,7 +222,6 @@ server.post('/webhook',function (req,res)  {
                 var partString = partCity;
               }
 
-              var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
               var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
               
@@ -264,8 +263,6 @@ server.post('/webhook',function (req,res)  {
                     }
                   }
                 };
-
-                boolWait = 0;
 
               });
 
