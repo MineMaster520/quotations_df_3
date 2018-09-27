@@ -201,36 +201,38 @@ server.post('/webhook',function (req,res)  {
 
             case "Agente-Conferma":
 
-            var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+              boolWait = 1;
 
-            superagent.get(mapMatrixUrl)
-              .end((err3, resp3) => {
+              var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
-              var respBody2 = resp3.text;
-              var bodyJSON2 = JSON.parse(respBody2);
+              superagent.get(mapMatrixUrl)
+                .end((err3, resp3) => {
 
-              var distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
-              var tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
+                var respBody2 = resp3.text;
+                var bodyJSON2 = JSON.parse(respBody2);
 
-              if (destStreet != "") {
-                var destString = destStreet + ", " + destCity;
-              } else if (destStreet == "" && destLoc != "") {
-                var destString = destLoc + ", " + destCity;
-              } else {
-                var destString = destCity;
-              }
+                var distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
+                var tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
-              if (partStreet != "") {
-                var partString = partStreet + ", " + partCity;
-              } else if (partStreet == "" && partLoc != "") {
-                var partString = partLoc + ", " + partCity;
-              } else {
-                var partString = partCity;
-              }
+                if (destStreet != "") {
+                  var destString = destStreet + ", " + destCity;
+                } else if (destStreet == "" && destLoc != "") {
+                  var destString = destLoc + ", " + destCity;
+                } else {
+                  var destString = destCity;
+                }
+
+                if (partStreet != "") {
+                  var partString = partStreet + ", " + partCity;
+                } else if (partStreet == "" && partLoc != "") {
+                  var partString = partLoc + ", " + partCity;
+                } else {
+                  var partString = partCity;
+                }
 
               var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
-              
+                
                 
 
               respJSON2 = {
@@ -343,12 +345,11 @@ server.post('/webhook',function (req,res)  {
             
     }
 
-    if(boolWait == 0) {
-      return res.json(respJSON2);
-    } else {
-      while(boolWait == 1) {
+    while(boolWait == 1) {
+      
+    }
 
-      }
+    if(boolWait == 0) {
       return res.json(respJSON2);
     }
           
