@@ -226,49 +226,49 @@ server.post('/webhook',function (req,res)  {
               var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
               superagent.get(mapMatrixUrl)
-              .end((err, resp) => {
-                var respBody2 = resp.text;
+              .end((err3, resp3) => {
+                var respBody2 = resp3.text;
                 var bodyJSON2 = JSON.parse(respBody2);
 
                 distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
                 tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
                 respJSON2 = {
-                "payload": {
-                  "google": {
-                    "expectUserResponse": true,
-                    "richResponse": {
-                      "items": [
-                        {
-                          "simpleResponse": {
-                            "textToSpeech": "Riepilogo richiesta preventivo. Conferma?"
-                          }
-                        },
-                        {
-                          "basicCard": {
-                            "title": "Conferma dati",
-                            "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
-                            "image": {
-                              "url": mapUrl,
-                              "accessibilityText": "Map"
-                            },
-                            "buttons": [
-                              {
-                                "title": "Conferma",
-                                "openUrlAction": {
-                                  "url": "https://www.google.com"
+                  "payload": {
+                    "google": {
+                      "expectUserResponse": true,
+                      "richResponse": {
+                        "items": [
+                          {
+                            "simpleResponse": {
+                              "textToSpeech": "Riepilogo richiesta preventivo. Conferma?"
+                            }
+                          },
+                          {
+                            "basicCard": {
+                              "title": "Conferma dati",
+                              "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
+                              "image": {
+                                "url": mapUrl,
+                                "accessibilityText": "Map"
+                              },
+                              "buttons": [
+                                {
+                                  "title": "Conferma",
+                                  "openUrlAction": {
+                                    "url": "https://www.google.com"
+                                  }
                                 }
-                              }
-                            ],
-                            "imageDisplayOptions": "WHITE"
+                              ],
+                              "imageDisplayOptions": "WHITE"
+                            }
                           }
-                        }
-                        
-                      ]
+                          
+                        ]
+                      }
                     }
                   }
-                }
-              };
+                };
 
               });
 
