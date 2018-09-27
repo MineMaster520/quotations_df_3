@@ -271,10 +271,8 @@ server.post('/webhook',function (req,res)  {
                 };
 
               });
-
-              boolWait = 0;
           
-              //return res.json(respJSON2);
+              return res.json(respJSON2);
               
             break;
 
