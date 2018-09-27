@@ -357,7 +357,7 @@ server.post('/webhook',function (req,res)  {
                   }
                 };
 
-          return res.JSON(respJSONConf);
+          return res.json(respJSONConf);
 
     });
 
