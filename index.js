@@ -54,7 +54,7 @@ server.post('/webhook',function (req,res)  {
   function matrixMap(dest, part) {
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + part + ",ITALIA&destinations=" + dest + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
-    superagent.get(mapMatrixUrl).await((err3, resp3) => {
+    superagent.get(mapMatrixUrl).end((err3, resp3) => {
       var respBody2 = resp3.text;
       var bodyJSON2 = JSON.parse(respBody2);
 
