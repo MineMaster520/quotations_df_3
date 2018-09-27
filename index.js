@@ -30,6 +30,8 @@ var tempoPerc = "";
 var distanzaPercApi = "";
 var tempoPercApi = "";
 
+var pointsPath = "";
+
 var todayDate = new Date();
 
 // create serve and configure it.
@@ -44,6 +46,8 @@ server.post('/webhook',function (req,res)  {
 
   });
 
+  //Retrieve map distance and duration
+
   var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
   superagent.get(mapMatrixUrl).end((err3, resp3) => {
@@ -53,6 +57,17 @@ server.post('/webhook',function (req,res)  {
 
     distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
     tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
+  });
+
+  //Retrieve points path road
+  var urlPoints= "https://maps.googleapis.com/maps/api/directions/json?origin=Via+Cesare+Battisti+37,Vimodrone,ITALIA&destination=Metropolitana+Vimodrone,ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+
+  superagent.get(urlPoints).end((err4, resp4) => {
+    var respBody2 = resp4.text;
+    var bodyJSON2 = JSON.parse(respBody2);
+
+    pointsPath = bodyJSON2['routes']['0']['overview_polyline']['points'];
+
   });
 
   function listaVeicoli(opz) {
@@ -129,9 +144,6 @@ server.post('/webhook',function (req,res)  {
   if(req.body.queryResult.intent.displayName == "Agente-Mail") {
 
     mail = req.body.queryResult.parameters.email;
-
-    /*var respBody = resp.text;
-    var bodyJSON = JSON.parse(respBody);*/
 
     var respJSON = listaVeicoli(0);
   
@@ -233,6 +245,7 @@ server.post('/webhook',function (req,res)  {
 
               var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
+              var mapPointsUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|enc:" + pointsPath + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
                 
                 
 
