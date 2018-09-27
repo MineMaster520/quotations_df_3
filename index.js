@@ -22,6 +22,9 @@ var destCity = "";
 var dataPart = "";
 var oraPart = "";
 var mail = "";
+
+var destString = "";
+var partString = "";
 var bodyJSON = {};
 
 var distanzaPerc = "";
@@ -48,16 +51,19 @@ server.post('/webhook',function (req,res)  {
 
   //Retrieve map distance and duration
 
-  var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Milano,ITALY&destinations=Roma,ITALY&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
+  function matrixMap(dest, part) {
+    var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + part + ",ITALIA&destinations=" + dest + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
-  superagent.get(mapMatrixUrl).end((err3, resp3) => {
+    superagent.get(mapMatrixUrl).end((err3, resp3) => {
 
-    var respBody2 = resp3.text;
-    var bodyJSON2 = JSON.parse(respBody2);
+      var respBody2 = resp3.text;
+      var bodyJSON2 = JSON.parse(respBody2);
 
-    distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
-    tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
-  });
+      distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
+      tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
+    });
+
+  }
 
   //Retrieve points path road
   var urlPoints= "https://maps.googleapis.com/maps/api/directions/json?origin=Via+Cesare+Battisti+37,Vimodrone,ITALIA&destination=Metropolitana+Vimodrone,ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
@@ -228,20 +234,22 @@ server.post('/webhook',function (req,res)  {
             case "Agente-Conferma":
 
                 if (destStreet != "") {
-                  var destString = destStreet + ", " + destCity;
+                  destString = destStreet + ", " + destCity;
                 } else if (destStreet == "" && destLoc != "") {
-                  var destString = destLoc + ", " + destCity;
+                  destString = destLoc + ", " + destCity;
                 } else {
-                  var destString = destCity;
+                  destString = destCity;
                 }
 
                 if (partStreet != "") {
-                  var partString = partStreet + ", " + partCity;
+                  partString = partStreet + ", " + partCity;
                 } else if (partStreet == "" && partLoc != "") {
-                  var partString = partLoc + ", " + partCity;
+                  partString = partLoc + ", " + partCity;
                 } else {
-                  var partString = partCity;
+                  partString = partCity;
                 }
+
+                matrixMap(destCity, partCity);
 
               var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
