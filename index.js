@@ -295,19 +295,22 @@ server.post('/webhook',function (req,res)  {
       partString = partCity;
     }
 
-    var partStringN = "";
-    var destStringN = "";
+    function findAndReplace(string, target, replacement) {
+     
+     var i = 0, length = string.length;
+     
+     for (i; i < length; i++) {
+     
+       string = string.replace(target, replacement);
+     
+     }
+     
+     return string;
+     
+    }
 
-    if(partString.includes(" ")) {
-      partStringN = partString.replace(/ /g, "+");
-    } else {
-      partStringN = partString;
-    }
-    if(destString.includes(" ")) {
-      destStringN = destString.replace(/ /g, "+");
-    } else {
-      destStringN = destString;
-    }
+    var partStringN = findAndReplace(partString, " ", "+");
+    var destStringN = findAndReplace(destString, " ", "+");
 
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partCity + ",ITALIA&destinations=" + destCity + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
      //Retrieve points path road
