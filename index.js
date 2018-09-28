@@ -283,23 +283,23 @@ server.post('/webhook',function (req,res)  {
     var destStringN = "";
 
     if (destStreet != "") {
-      destString = destStreet + "," + destCity;
+      destString = destStreet + ", " + destCity;
     } else if (destStreet == "" && destLoc != "") {
-      destString = destLoc + "," + destCity;
+      destString = destLoc + ", " + destCity;
     } else {
       destString = destCity;
     }
 
     if (partStreet != "") {
-      partString = partStreet + "," + partCity;
+      partString = partStreet + ", " + partCity;
     } else if (partStreet == "" && partLoc != "") {
-      partString = partLoc + "," + partCity;
+      partString = partLoc + ", " + partCity;
     } else {
       partString = partCity;
     }
 
-    /*var partStringN = partString.replace(/\s/g, "+");
-    var destStringN = destString.replace(/\s/g, "+");*/
+    var partStringN = partString.replace(/\s/g, "+");
+    var destStringN = destString.replace(/\s/g, "+");
 
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partCity + ",ITALIA&destinations=" + destCity + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
      //Retrieve points path road
