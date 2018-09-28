@@ -298,16 +298,8 @@ server.post('/webhook',function (req,res)  {
       partString = partCity;
     }
 
-    for(var k=0; k < destString.length; k++) {
-      if(destString[k] == " ") {
-        destStringN[k] = "+";
-      } else {
-        destStringN[k] = destString[k];
-      }
-    }
-
-    /*partStringN = partString.replace(" ", "+", "g");
-    destStringN = destString.replace(" ", "+", "g");*/
+    partStringN = partString.replace(/\s/g, "+");
+    destStringN = destString.replace(/\s/g, "+");
 
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partCity + ",ITALIA&destinations=" + destCity + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
      //Retrieve points path road
