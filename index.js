@@ -298,8 +298,8 @@ server.post('/webhook',function (req,res)  {
       partString = partCity;
     }
 
-    partStringN = partString.replace(/\s/g, "+");
-    destStringN = destString.replace(/\s/g, "+");
+    /*partStringN = partString.replace(/\s/g, "+");
+    destStringN = destString.replace(/\s/g, "+");*/
 
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partCity + ",ITALIA&destinations=" + destCity + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
      //Retrieve points path road
@@ -340,7 +340,7 @@ server.post('/webhook',function (req,res)  {
                           {
                             "basicCard": {
                               "title": "Conferma dati",
-                              "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destStringN + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
+                              "formattedText": "**Partenza**: " + partString + "\n  \n**Destinazione**: " + destString + "\n  \n**Data**: " + dataPart + "\n  \n**Ora**: " + oraPart + "\n  \n**Distanza**: " + distanzaPercApi + ", **Durata prevista**: " + tempoPercApi + "\n  \n**Passeggeri**: " + numPass + "\n  \n**Email**: " + mail,
                               "image": {
                                 "url": mapPointsUrl,
                                 "accessibilityText": "Map"
