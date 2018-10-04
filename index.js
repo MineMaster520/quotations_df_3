@@ -6,12 +6,13 @@ const http = require('https');
 const superagent = require('superagent');
 var unirest = require("unirest");
 
-
-let errorResposne = {
+let errorResponse = {
     results: []
 };
 
 var port = process.env.PORT || 8080;
+
+//Variabili (purtroppo) globali, contengono i dati immessi dall'utente
 var numPass = "";
 var partLoc = "";
 var partStreet = "";
@@ -22,36 +23,24 @@ var destCity = "";
 var dataPart = "";
 var oraPart = "";
 var mail = "";
-
-var destString = "";
-var partString = "";
-var bodyJSON = {};
-
-var distanzaPerc = "";
-var tempoPerc = "";
-
+var destString = ""; //Stringa che vedrà l'utente nella conferma, contiene tutto
+var partString = ""; // ""
 var distanzaPercApi = "";
 var tempoPercApi = "";
 
-var pointsPath = "";
+var pointsPath = ""; //Punti del percorso acquisiti da gmaps, codificati
 
 var todayDate = new Date();
 
-// create serve and configure it.
+
+var bodyJSON = {};
+
+// create server and configure it.
 const server = express();
 server.use(bodyParser.json());
 server.post('/webhook',function (req,res)  {
 
-  superagent.get('http://quote.moveolux.com:88/home/testquote?from=milano&to=roma&day=13/12/2018&time=10:00')
-  .end((err, resp) => {
-    var respBody = resp.text;
-    bodyJSON = JSON.parse(respBody);
-
-  });
-
-
- 
-
+//Funzione che restituisce il JSON contenente le opzioni dei veicoli, 'opz' è in base all'intent (se vuole cambiare l'email oppure no)
   function listaVeicoli(opz) {
         var opzText = "Scegli un'opzione";
         if(opz == 1) {
@@ -123,21 +112,24 @@ server.post('/webhook',function (req,res)  {
 
   }
 
+
+  // Inizio if-else statement (di nuovo, purtroppo) in base all'intent in cui è l'utente
+
+
   if(req.body.queryResult.intent.displayName == "Agente-Mail") {
 
-    mail = req.body.queryResult.parameters.email;
+    mail = req.body.queryResult.parameters.email; //Acquisisce il parametro dalla request ricevuta
 
-    var respJSON = listaVeicoli(0);
-  
+    var respJSON = listaVeicoli(0); //Richiama la funzione specifica per l'intent
 
     return res.json(respJSON);
+
 
   } else if (req.body.queryResult.intent.displayName != "Agente-Conferma") {
 
     var respJSON2 = {};
-    var boolWait = 0;
 
-    switch(req.body.queryResult.intent.displayName) {
+    switch(req.body.queryResult.intent.displayName) { //Switch in base all'intent
 
             case "Agente_Destinazione":
               destLoc = req.body.queryResult.parameters.luogo;
@@ -147,7 +139,6 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "Si, certamente! Per quante persone vorrebbe l'auto?"
               };
-              boolWait = 0;
             break;
 
             case "Agente-NumeroPasseggeri":
@@ -155,7 +146,6 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = { 
                 "fulfillmentText": "Perfetto, mi dica da dove vuole partire."
               };
-              boolWait = 0;
             break;
 
             case "Agente-CittaDiPartenza":
@@ -166,7 +156,6 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "Bene, per quale giorno prenoterebbe l'auto?"
               };
-              boolWait = 0;
             break;
 
             case "Agente-GiornoPartenza":
@@ -179,7 +168,6 @@ server.post('/webhook',function (req,res)  {
                 respJSON2 = {
                 "fulfillmentText": "Per che ora gradirebbe partire?"
                 };
-                boolWait = 0;
               } else {
                 respJSON2 = {
                   "fulfillmentText": "La data di partenza deve essere almeno domani. Per favore ripetere la data.",
@@ -191,7 +179,6 @@ server.post('/webhook',function (req,res)  {
                     }
                   }
                 };
-                boolWait = 0;
               }
               
             break;
@@ -204,7 +191,6 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "Mi servirebbe cortesemente la sua mail?"
               };
-              boolWait = 0;
             break;
 
             case "Agente_Destinazione-no":
@@ -212,7 +198,6 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "La destinazione è stata cambiata. Per quante persone?"
               };
-              boolWait = 0;
             break;
 
             case "Agente-NumeroPasseggeri-no":
@@ -220,7 +205,6 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "Il numero di passeggeri è stato cambiato. Da dove dovrebbe partire?"
               };
-              boolWait = 0;
             break;
 
             case "Agente-CittaDiPartenza-no":
@@ -228,7 +212,6 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "La città di partenza è stata cambiata. Che giorno vuole partire?"
               };
-              boolWait = 0;
             break;
 
             case "Agente-GiornoPartenza-no":
@@ -242,7 +225,6 @@ server.post('/webhook',function (req,res)  {
                 respJSON2 = {
                 "fulfillmentText": "La data di partenza è stata cambiata. A che ora desidera partire?"
                 };
-                boolWait = 0;
               } else {
                 respJSON2 = {
                   "fulfillmentText": "La data di partenza deve essere successiva ad oggi. Per favore ripetere la data.",
@@ -254,7 +236,6 @@ server.post('/webhook',function (req,res)  {
                     }
                   }
                 };
-                boolWait = 0;
               }
             break;
 
@@ -263,13 +244,11 @@ server.post('/webhook',function (req,res)  {
               respJSON2 = {
                 "fulfillmentText": "L'ora di partenza è stata modificata. Mi potrebbe dire il suo indirizzo email?"
               };
-              boolWait = 0;
             break;
 
             case "Agente-Mail-no":
               mail = req.body.queryResult.parameters.email;
               respJSON2 = listaVeicoli(1);
-              boolWait = 0;
             break;
             
     }
@@ -282,7 +261,7 @@ server.post('/webhook',function (req,res)  {
     var partStringN = "";
     var destStringN = "";
 
-    if (destStreet != "") {
+    if (destStreet != "") { // Creazione delle stringhe che visualizzerà l'utente, contenenti tutto l'indirizzo e la città, se presenti
       destString = destStreet + ", " + destCity;
     } else if (destStreet == "" && destLoc != "") {
       destString = destLoc + ", " + destCity;
@@ -298,31 +277,32 @@ server.post('/webhook',function (req,res)  {
       partString = partCity;
     }
 
-    /*partStringN = partString.replace(/\s/g, "+");
-    destStringN = destString.replace(/\s/g, "+");*/
+    /*partStringN = partString.replace(/\s/g, "+"); // Ho cercato di mettere tutta la località nell'url, e quindi cambiare gli spazi con
+    destStringN = destString.replace(/\s/g, "+");*/ // un "+", ma il programma crasha senza apparente motivo, quindi ho lasciato solo le città
 
+    //Definizione URL per la distanza e il tempo previsti
     var mapMatrixUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + partCity + ",ITALIA&destinations=" + destCity + ",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
-     //Retrieve points path road
+    //Definizione URL per i punti del percorso
     var urlPoints= "https://maps.googleapis.com/maps/api/directions/json?origin=" + partCity + ",ITALIA&destination=" + destCity +",ITALIA&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
 
 
-    superagent.get(mapMatrixUrl).end((err3, resp3) => {
+    superagent.get(mapMatrixUrl).end((err3, resp3) => { //Non essendo riuscito a utilizzare l'async, ho dovuto utilizzare questa soluzione
       superagent.get(urlPoints).end((err4, resp4) => {
-      var respBody2 = resp3.text;
-      var bodyJSON2 = JSON.parse(respBody2);
+          var respBody2 = resp3.text;
+          var bodyJSON2 = JSON.parse(respBody2); //Acquisizione del JSON del 'mapMatrixUrl', per la distanza e il tempo
 
-      distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
-      tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
+          distanzaPercApi = bodyJSON2['rows']['0']['elements']['0']['distance']['text'];
+          tempoPercApi = bodyJSON2['rows']['0']['elements']['0']['duration']['text'];
 
-      var respBodyPath = resp4.text;
-      var bodyJSONPath = JSON.parse(respBodyPath);
+          var respBodyPath = resp4.text;
+          var bodyJSONPath = JSON.parse(respBodyPath); // Acquisizione del JSON del 'urlPoints', per i punti del percorso
 
-      pointsPath = bodyJSONPath['routes']['0']['overview_polyline']['points'];
+          pointsPath = bodyJSONPath['routes']['0']['overview_polyline']['points'];
 
               
-
+          //Definizione URL per la visualizzazione della mappa (non più usata)
           var mapUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|" + partCity + ",ITALY|" + destCity + ",ITALY" + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
-
+          //Definizione URL per la visualizzazione della mappa con l'utilizzo dei punti del percorso
           var mapPointsUrl = "https://maps.googleapis.com/maps/api/staticmap?path=weight:5|enc:" + pointsPath + "&size=600x300&maptype=roadmap&key=AIzaSyCIeu1JhV_R4AGNnaiv74gHF5t6b-ilVhU";
                 
 
